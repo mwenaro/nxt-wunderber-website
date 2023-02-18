@@ -28,11 +28,12 @@ jobs:
           username: ${{ secrets.ftp_user }}
           password: ${{ secrets.ftp_password }}
           exclude: |
+           **/.code/**
            **/.git*
            **/.git*/**
            **/node_modules/**
            *lock.json
           server-dir: ./dev2.wunderber.com/
-          # dangerous-clean-slate: true
+          dangerous-clean-slate: true
 
       
