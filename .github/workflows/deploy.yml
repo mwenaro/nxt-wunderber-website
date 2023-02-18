@@ -2,7 +2,7 @@ on:
   push:
     branches: dev
 
-name: 🚀 Deploy website on push
+name: 🚀 Deploy dev-site on push on the dev branch
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -18,7 +18,7 @@ jobs:
 
       - name: 🔨 pkg installation and build
         run: |
-          npm install -f
+          npm install
           npm run build
         
       - name: 📂 Sync FrontEnd files
@@ -33,6 +33,6 @@ jobs:
            **/node_modules/**
            *lock.json
           server-dir: ./dev2.wunderber.com/
-          dangerous-clean-slate: true
+          # dangerous-clean-slate: true
 
       

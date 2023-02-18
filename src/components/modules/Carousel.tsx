@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 import {Carousel} from 'react-responsive-carousel';
@@ -22,7 +23,7 @@ const MyCarousel: React.FC<Props> = ({ images }) => {
     >
       {images.map(({src,des}:{src:string,des:string})=> (
         <div key={src} className=" mx-auto h-96 overflow-hidden p-4 bg-white w-fit rounded-lg flex justify-center items-center">
-          <img src={src} alt={des} className="h-full aspect-auto object-contain  rounded-lg"/>
+          <Image src={src} alt={des} className="h-full aspect-auto object-contain  rounded-lg"/>
         </div>
       ))}
     </Carousel>

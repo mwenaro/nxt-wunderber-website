@@ -56,10 +56,10 @@ export default function Services() {
       <div className="flex flex-col items-center">
         <h2 className="font-bold text-4xl text-center">Our Services</h2>
       </div>
-      {links.map(link => (
+      {links.map((link ,index)=> (
 
         // <Link to={link.path} key={link.name}>
-          <div className="flex gap-5 py-4 items-center">
+          <div key={index} className="flex gap-5 py-4 items-center">
             {/* <img src={link.image} alt={link.name} /> */}
             {link.icon}
             <h3 className="font-semibold text-2xl ">{link.name}</h3>
