@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { ContactForm, PageWrapper } from '../../components/modules'
+import { ContactForm, Map, PageWrapper } from '../../components/modules'
 
 export default function Contact() {
   return (
@@ -14,6 +14,11 @@ export default function Contact() {
       <ContactForm />
       </div>
      
+    </div>
+    <div className='flex items-center justify-between '>
+    
+ 
+    <Map   />
     </div>
 </PageWrapper>
   )
