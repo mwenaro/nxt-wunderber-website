@@ -4,4 +4,5 @@ export {default as Footer}  from './Footer'
 export {default as Carousel}  from './Carousel'
 export {default as PageWrapper}  from './PageWrapper'
 export {default as Map}  from './Map'
+export {default as BookingForm}  from './BookingForm'
 

@@ -1,6 +1,7 @@
 export const navLinks =[
     {label:"Home",link:"/"},
     {label:"Services",link:"/services"},
+    {label:"Booking",link:"/booking"},
     {label:"About",link:"/about"},
     {label:"Gallery",link:"/gallery"},
     {label:"Contact",link:"/contact"}
@@ -18,7 +19,8 @@ export const ourServices = [
 'Hotel bookings ',
 'Flight booking',
 'Transfers',
-'Excursion',
+'Air Safaris',
+'Road Safaris',
 'Game safaris',
 'City Tours',
 'Marine Tours',

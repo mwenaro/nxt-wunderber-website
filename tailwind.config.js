@@ -18,10 +18,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: withOpacity("--color-text-base"),
-        secondary: withOpacity("--color-text-muted"),
-        accent: withOpacity("--color-text-inverted"),
-        inverted: withOpacity("--color-text-inverted"),
+        skin: {
+          primary: withOpacity("--primary"),
+          secondary: withOpacity("--secondary"),
+          accent: withOpacity("--accent"),
+          main: withOpacity("--main"),
+        },
       },
 
       // body {
@@ -64,5 +66,10 @@ module.exports = {
       // }
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy:'class'
+    }),
+     require("daisyui")
+    ],
 };
