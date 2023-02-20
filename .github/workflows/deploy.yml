@@ -5,7 +5,7 @@ on:
 name: 🚀 Deploy dev-site on push on the dev branch
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🎉 Deploy1
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
