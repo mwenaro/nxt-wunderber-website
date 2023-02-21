@@ -11,8 +11,10 @@ lat:-4.2968,lng:39.5825
 }
 
 export const position = {
-lat:-4.2968,lng:39.5822
+lat:-4.2968,lng:39.5825
 }
+export const GA_TRACKING_ID:string = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID||'';
+
 
 export const ourServices = [
     'Services',

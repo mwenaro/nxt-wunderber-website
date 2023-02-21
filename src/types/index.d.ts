@@ -11,6 +11,7 @@ declare global {
 export type WindowWithDataLayer = Window & {
   gtag: Function;
   dataLayer:[]|any;
+  ga:any
 };
 
 declare const window: WindowWithDataLayer;
