@@ -14,7 +14,7 @@ const RealTimeTrafficComponent: React.FC = () => {
     ReactGA.initialize(GA_TRACKING_ID);
     ReactGA.pageview('/real-time-traffic');
 
-  
+  console.log({GA_TRACKING_ID})
   }, []);
 
   return (

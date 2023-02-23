@@ -3,53 +3,12 @@ import React from "react";
 // import { FaStar } from "react-icons/fa";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { IInputFiledProps } from "@/types";
+import { IBookingForm, IInputFiledProps } from "@/types";
+import CountryOptions from "./CountryOptions";
+import { InputField, InputFieldContainer } from "./form";
 
-interface SafariFormData {
-  fullName: string;
-  email: string;
-  phone: string;
-  country: string;
-  departureDate: string;
-  safariType: string;
-  safariDuration: string;
-  accommodationLevel: string;
-  otherServices: string[];
-  specialInterests: string;
-}
 
-const InputField = ({ label, idAndName, type = null, placeholder ='' ,styles, messageStyles, fieldStyles,labelStyles }: IInputFiledProps) => (
-  <div className={`flex flex-col gap-2 px-3 my-2 bg-inherit bg-opacity-75 rounded-xl ${styles ? styles : ''}`}>
-    <label className={` ${labelStyles}`}>
-    <span>  {label} </span></label>
-    <div>
-      <Field
-        type={`${type ? type : 'text'}`}
-        name={idAndName}
-        className={`px-5 p-2 rounded-md  ${messageStyles}`}
-        placeholder = {placeholder||label}
-      />
-      <ErrorMessage  component={'div'} name={idAndName} className={`text-red-500 p-5 ${messageStyles}`} />
 
-    </div>
-  </div>
-);
-const InputField2 = ({ label, idAndName, type = null, placeholder ='' ,styles, messageStyles, fieldStyles,labelStyles }: IInputFiledProps) => (
-  <div className={`form-control  ${styles ? styles : ''}`}>
-    <label className={`label ${labelStyles}`}>
-    <span>  {label} </span></label>
-    <div>
-      <Field
-        type={`form-input  ${type ? type : 'text'}`}
-        name={idAndName}
-        className={`px-5 p-2 rounded-md  ${messageStyles}`}
-        placeholder = {placeholder||label}
-      />
-      <ErrorMessage  component={'div'} name={idAndName} className={`text-red-500 p-5 ${messageStyles}`} />
-
-    </div>
-  </div>
-);
 
 const SAFARI_TYPES = [
   { label: "--Select Safari Type--", value: "" },
@@ -72,14 +31,12 @@ const ACCOMMODATION_LEVELS = [
   // { label: <><FaStar /><FaStar /><FaStar /><FaStar /><FaStar /></>, value: "5 Star" },
   // { label: <><FaStar /><FaStar /><FaStar /><FaStar /></>, value: "4 Star" },
   // { label: <><FaStar /><FaStar /><FaStar /></>, value: "3 Star" },
-  { label: "5 Start", value: "5Star" },
-  { label: "4 Start", value: "4Star" },
-  { label: "3 Start", value: "3Star" },
   { label: "Budget", value: "Budget" },
   { label: "Camping", value: "Camping" },
 ];
+
 const BookingForm: React.FC = () => {
-  const initialValues: SafariFormData = {
+  const initialValues: IBookingForm = {
     fullName: "",
     email: "",
     phone: "",
@@ -103,64 +60,92 @@ const BookingForm: React.FC = () => {
     accommodationLevel: Yup.string().required("Accommodation level is required"),
   });
 
-  const onSubmit = (values: SafariFormData) => {
+  const onSubmit = (values: IBookingForm) => {
     console.log(values);
-    fetch('/api/booking', 
-      {body:JSON.stringify(values),method:"POST"}
-    ).then(res=>res.json())
-    .then(data=>console.log({data}))
-    .catch(err=>console.log({err}))
   };
-
-
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
-        <Form className="flex flex-col items-center justify-center">
-          <div className="flex flex-col py-2 max-w-md">
+        <Form >
+          <div className="flex flex-col gap-2 mx-auto max-w-md justify-center ">
             <InputField
-              label={'Full Name'}
-              idAndName={'fullName'}
-            />
-            <InputField
-              label={'Email Address'}
-              idAndName={'email'}
+              idAndName="fullName"
+              type="text"
+              label="Full Name"
+              fieldStyles="form-input w-full"
             />
 
             <InputField
-              label={'Phone Number'}
-              type='tel'
-              idAndName={'phone'}
+              idAndName="email"
+              type="email"
+              label="Email Address"
+              fieldStyles="form-input w-full"
             />
 
             <InputField
-              label={'Country'}
-              idAndName={'country'}
-            />
-            <InputField
-              label={'Departure Date'}
-              type='date'
-              idAndName={'departureDate'}
+              idAndName="phone"
+              type="tel"
+              label="Phone Number"
+              fieldStyles="form-input w-full"
             />
 
+            <InputField
+              idAndName="country"
+              type="select"
+              label="Country"
+
+            >
+              <option value={''}> --- Country --- </option>
+              <CountryOptions />
+            </InputField>
+
+
+            {/* <InputField 
+          idAndName="departureDate"
+          type="date"
+          label="Departure Date"
+          fieldStyles="form-input w-full"
+          /> */}
+          <InputFieldContainer styles="">
+            <label className="py-2">
+              Departure Date </label>
+              <Field type="date" name="departureDate" className="w-full form-input px-5 p-2 rounded-md " />
+              <ErrorMessage name="departureDate" />
            
+            </InputFieldContainer>
 
-            <label className="block px-3 py-3">
-              Safari Type:
-              <Field as="select" name="safariType">
-                {SAFARI_TYPES.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
 
-              </Field>
-              <ErrorMessage name="safariType" />
-            </label>
-            <label className="block px-3 py-3">
+            <InputField
+              idAndName="safariType"
+              type="select"
+              options={SAFARI_TYPES}
+              label="Safari Type"
+
+            />
+
+
+
+            {/* <label className="py-2">
+        Safari Type:
+        <Field as="select" className="form-select w-full" name="safariType">
+          {SAFARI_TYPES.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </Field>
+        <ErrorMessage name="safariType" />
+      </label> */}
+            <InputField
+              idAndName="safariDuration"
+              type="select"
+              label="Safari Duration"
+              options={SAFARI_DURATIONS}
+            />
+            {/* <label className="py-2">
               Safari Duration:
-              <Field as="select" name="safariDuration">
+              <Field as="select" className="form-select w-full" name="safariDuration">
                 {SAFARI_DURATIONS.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
@@ -168,32 +153,51 @@ const BookingForm: React.FC = () => {
                 ))}
               </Field>
               <ErrorMessage name="safariDuration" />
-            </label>
-            <label className="block px-3 py-3">
-              Accommodation Level:
-              <Field as="select" name="accommodationLevel">
-                {ACCOMMODATION_LEVELS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="accommodationLevel" />
-            </label>
-            <label className="block px-3 py-3">
-              Other Services Needed:
-              <Field type="checkbox" name="otherServices" value="Activities" />
-              Activities
-              <Field type="checkbox" name="otherServices" value="Tour Guides" />
-              Tour Guides
-              <Field type="checkbox" name="otherServices" value="Unique Experiences" />
-              Unique Experiences
-            </label>
-            <label className="block px-3 py-3">
-              Special Interests:
-              <Field type="text" name="specialInterests" />
-            </label>
-            <button type="submit" className=" btn btn-block btn-primary p-3">Submit</button>
+            </label> */}
+            <InputField
+              idAndName="accommodationLevel"
+              type="select"
+              label="Accommodation Level"
+              options={ACCOMMODATION_LEVELS}
+            />
+            
+
+            <InputField
+              idAndName="otherServices"
+              type="checkbox"
+
+              options={[
+                { label: "Activities", value: "Activities" },
+                { label: "Tour Guides", value: "Tour Guides" },
+                { label: "Unique Experiences", value: "Unique Experiences" },
+              ]}
+
+              label="Other Services Needed"
+              fieldStyles="form-input w-full"
+            />
+
+            {/* <label className="py-2">
+        Other Services Needed:
+        <Field type="checkbox" name="otherServices" value="Activities" />
+        Activities
+        <Field type="checkbox" name="otherServices" value="Tour Guides" />
+        Tour Guides
+        <Field type="checkbox" name="otherServices" value="Unique Experiences" />
+        Unique Experiences
+      </label> */}
+
+            <InputField
+              idAndName="specialInterests"
+
+              label="Special Interests"
+              fieldStyles="form-input w-full"
+            />
+            {/* <label className="py-2">
+        Special Interests:
+        <Field type="text" name="specialInterests" />
+      </label> */}
+
+            <button type="submit" className="w-5/6 btn btn-primary p-3 mb-3 mx-auto">Submit</button>
           </div>
         </Form>
       )}

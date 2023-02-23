@@ -12,6 +12,7 @@
   "dependencies": {
     "@next/font": "13.1.6",
     "@react-google-maps/api": "^2.18.1",
+    "@types/nedb": "^1.8.12",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
@@ -21,6 +22,9 @@
     "eslint-config-next": "13.1.6",
     "formik": "^2.2.9",
     "framer-motion": "^8.5.5",
+    "nedb": "^1.8.0",
+    "nedb-promises": "^6.2.1",
+    "nedb-promises-ts": "^0.0.1-4",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
