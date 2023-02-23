@@ -3,7 +3,7 @@ import React from "react";
 // import { FaStar } from "react-icons/fa";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { IBookingForm, IInputFiledProps } from "@/types";
+import { IBookingForm} from "@/types";
 import CountryOptions from "./CountryOptions";
 import { InputField, InputFieldContainer } from "./form";
 
@@ -31,7 +31,11 @@ const ACCOMMODATION_LEVELS = [
   // { label: <><FaStar /><FaStar /><FaStar /><FaStar /><FaStar /></>, value: "5 Star" },
   // { label: <><FaStar /><FaStar /><FaStar /><FaStar /></>, value: "4 Star" },
   // { label: <><FaStar /><FaStar /><FaStar /></>, value: "3 Star" },
-  { label: "Budget", value: "Budget" },
+  {label: "", value:""},
+  {label: "5 Star" , value:"5 Star" },
+  {label: "4 Star" , value:"4 Star" },
+  {label: "3 Star" , value:"3 Star" },
+ { label: "Budget", value: "Budget" },
   { label: "Camping", value: "Camping" },
 ];
 
