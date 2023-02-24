@@ -45,6 +45,8 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{secrets.SSH_PORT}}
         script: |
-          pwd
-          ls -la
+          source source /home/mwerothe/nodevenv/stag.wunderber.com/16/bin/activate && cd /home/mwerothe/stag.wunderber.com
+          git pull
+          npm install
+          npm run deploy
         
