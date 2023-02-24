@@ -13,6 +13,7 @@ interface Props {
 
 const MyCarousel: React.FC<Props> = ({ images }) => {
   return (
+    <div className='mx-auto max-w-md'>
     <Carousel
       showArrows={true}
       showThumbs={false}
@@ -29,13 +30,14 @@ const MyCarousel: React.FC<Props> = ({ images }) => {
           <Image 
           src={src} 
           alt={des} 
-         
+         loading ={'eager'}
           width={400}
           height ={300}
           className="h-full aspect-auto object-contain  rounded-lg"/>
         </div>
       ))}
     </Carousel>
+    </div>
   );
 };
 
