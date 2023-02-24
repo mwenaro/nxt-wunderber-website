@@ -22,10 +22,11 @@ jobs:
         password: ${{ secrets.SSH_PWD}}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          # cd /home/myusername/myapp
+          pwd
+          ls
           cd /home/mwerothe/stag.wunderber.com
           pwd
-          git pull origin main
-          npm install
-          npm run build
-          pm2 restart server.js
+          # git pull origin main
+          # npm install
+          # npm run build
+          # pm2 restart server.js
