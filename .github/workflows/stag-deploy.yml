@@ -45,5 +45,5 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{secrets.SSH_PORT}}
         script: |
-          cd /home/mwerothe/stag.wunderber.com
+          cd /home/mwerothe/nodevenv/stag.wunderber.com/16/bin/node
           pm2 restart server.js
