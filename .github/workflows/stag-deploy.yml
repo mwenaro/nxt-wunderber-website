@@ -40,9 +40,9 @@ jobs:
     - name: Deploy app using SSH
       uses: appleboy/ssh-action@master
       with:
-        host: {{secrets.SSH_HOST}}
-        username: {{secrets.SSH_USER}}
-        port: {{secrets.SSH_PORT}}
+        host: ${{secrets.SSH_HOST}}
+        username: ${{secrets.SSH_USER}}
+        port: ${{secrets.SSH_PORT}}
         script: |
           cd /home/mwerothe/stag.wunderber.com
           pm2 restart server.js
