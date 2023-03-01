@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         npm install
-        npm run buid
+        npm run build
       
 
     - name: Start app using PM2
@@ -40,9 +40,13 @@ jobs:
     - name: Deploy app using SSH
       uses: appleboy/ssh-action@master
       with:
-        host: {{secrets.SSH_HOST}}
-        username: {{secrets.SSH_USER}}
-        port: {{secrets.SSH_PORT}}
+        host: ${{secrets.SSH_HOST}}
+        username: ${{secrets.SSH_USER}}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{secrets.SSH_PORT}}
         script: |
-          cd /home/mwerothe/stag.wunderber.com
-          pm2 restart server.js
+          source source /home/mwerothe/nodevenv/stag.wunderber.com/16/bin/activate && cd /home/mwerothe/stag.wunderber.com
+          git pull
+          npm install
+          npm run deploy
+        

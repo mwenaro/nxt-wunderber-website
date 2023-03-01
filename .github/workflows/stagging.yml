@@ -51,6 +51,7 @@ jobs:
               npm run build
               npm i -g pm2
               pm2 restart server.js
+              
               # git pull origin main
               # npm install
               # npm run build
