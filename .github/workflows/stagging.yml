@@ -1,32 +1,60 @@
 name: Deploy to cPanel
 on:
   push:
-    branches: [ stag ]
+    branches: [stag]
 
 jobs:
-  deploy:
+  web-deploy:
+    name: 🎉 Deploy1
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16.x'
-    - name: Install Dependencies
-      run: npm install
-    - name: SSH and Deploy
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.SSH_PWD}}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          pwd
-          ls
-          cd /home/mwerothe/stag.wunderber.com
-          pwd
-          # git pull origin main
-          # npm install
-          # npm run build
-          # pm2 restart server.js
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+
+      - name: 🔨 pkg installation and build
+        run: |
+          npm install
+          npm run build
+
+      - name: 📂 Sync Uploading files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.ftp_server }}
+          username: ${{ secrets.ftp_user }}
+          password: ${{ secrets.ftp_password }}
+          exclude: |
+            **/.vscode/**
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            *lock.json
+          server-dir: ./stag.wunderber.com/
+          # dangerous-clean-slate: true
+
+      - name: SSH and Deploy
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.FTP_USER }}
+            password: ${{ secrets.SSH_PWD}}
+            port: ${{ secrets.SSH_PORT }}
+            script: |
+              pwd
+              source /home/mwerothe/nodevenv/stag.wunderber.com/16/bin/activate && cd /home/mwerothe/stag.wunderber.com
+              pwd
+              npm i
+              npm run build
+              npm i -g pm2
+              pm2 restart server.js
+              # git pull origin main
+              # npm install
+              # npm run build
+              # pm2 restart server.js 
+
+
+ 
