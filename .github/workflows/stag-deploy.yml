@@ -1,0 +1,48 @@
+name: Deploy Node.js app using PM2
+
+on:
+  push:
+    branches:
+      - stag
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '16.x'
+
+    - name: Install PM2
+      run: npm install pm2 -g
+
+    - name: Install dependencies
+      run: |
+        npm install
+        npm run buid
+      
+
+    - name: Start app using PM2
+      run: pm2 start server.js
+
+    - name: Save PM2 process list
+      run: pm2 save
+
+    - name: Set up SSH connection to server
+      uses: webfactory/ssh-agent@v0.5.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy app using SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: {{secrets.SSH_HOST}}
+        username: {{secrets.SSH_USER}}
+        port: {{secrets.SSH_PORT}}
+        script: |
+          cd /home/mwerothe/stag.wunderber.com
+          pm2 restart server.js
