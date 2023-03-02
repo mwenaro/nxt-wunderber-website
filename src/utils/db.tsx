@@ -1,6 +1,7 @@
 const Datastore = require('nedb-promises')
 const path = require('path')
-export const datastore = Datastore.create(path.join(__dirname,'../db/guetsdb.db'));
+export const datastore = Datastore.create(path.join(__dirname,'/ds/datastore.db'));
+export const guestDb = Datastore.create(path.join(__dirname,'/db1/guetsdb.db'));
 import { IGuest } from "@/types";
 import Nedb from "nedb-promises-ts";
 

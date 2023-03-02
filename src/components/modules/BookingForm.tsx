@@ -72,8 +72,9 @@ const BookingForm: React.FC = () => {
     })
     .then(res=>res.json())
     .then(data=>{
+      console.log(data)
       alert('booking was successful, check your email to proceed to payment!');
-      console.log({in:"then in handle bookig",data})
+      // console.log({in:"then in handle bookig",data:data})
     })
     .catch(err=>{
       alert("An error has occured, plz try again");

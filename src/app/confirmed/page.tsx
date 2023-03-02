@@ -2,6 +2,6 @@
 
 export default function page() {
   return (
-    <div>You're confired!</div>
+    <div>You are confired!</div>
   )
 }
