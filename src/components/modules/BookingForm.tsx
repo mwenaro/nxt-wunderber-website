@@ -65,7 +65,20 @@ const BookingForm: React.FC = () => {
   });
 
   const onSubmit = (values: IBookingForm) => {
-    console.log(values);
+    // console.log(values);
+    fetch('/api/booking', {
+      method:"POST",
+      body:JSON.stringify(values)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      alert('booking was successful, check your email to proceed to payment!');
+      console.log({in:"then in handle bookig",data})
+    })
+    .catch(err=>{
+      alert("An error has occured, plz try again");
+      console.log({in:"then in handle bookig",err})
+    })
   };
 
   return (

@@ -8,7 +8,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const { email } = req.body;
+  const { email ="mwerothewebmaker@gmail.com" } = req.body;
 
   // Generate a unique confirmation token
   const token = uuidv4();
