@@ -19,7 +19,7 @@ jobs:
       - name: 🔨 pkg installation and build
         run: |
           npm install
-          npm run build
+          npm run build`
 
       - name: 📂 Sync Uploading files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
