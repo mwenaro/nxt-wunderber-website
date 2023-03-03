@@ -1,26 +1,8 @@
 "use client"
-import { useFaker } from 'react-fakers'
+
 import React from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { BarGraph, Sidebar } from '@/components';
 
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
 
 const options = {
   responsive: true,
@@ -35,36 +17,37 @@ const options = {
   },
 };
 
-const labels:string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
- const data:{
-  labels:string[]
-  ,datasets:{label:string,data:any[],backgroundColor:string}[]} = {
+const data: {
+  labels: string[]
+  , datasets: { label: string, data: any[], backgroundColor: string }[]
+} = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
-      data: labels.map(() => Math.random()*1000),
+      label: 'Orders',
+      data: labels.map(() => Math.random() * 1000),
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
-    // {
-    //   label: 'Dataset 2',
-    //   data: labels.map(() => Math.random()*1000),
-    //   backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    // },
+    {
+      label: 'Sales',
+      data: labels.map(() => Math.random() * 1000),
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
   ],
 };
 
 
 
 
-export default function page() {
+export default function Dashboard() {
   return (
-    <div className="grid grid-col-1 sm:grid-cols-6">
-      <div className='col-span-1 sm:col-span-2'></div>
-      <div className='col-span-1 sm:col-span-4'>
-      <Bar options={options} data={data} />;
-      </div>
+    <div className="w-full">
+      
+        <BarGraph options={options} data={data} title ="Monthly Sales"/>
+
+      
 
     </div>
   )
