@@ -8,7 +8,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const { email ="mwerothewebmaker@gmail.com" } = req.body;
+  const { email ="mweroabdalla@gmail.com" } = req.body;
 
   // Generate a unique confirmation token
   const token = uuidv4();
@@ -18,14 +18,14 @@ export default async function handler(
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "mweroabdalla@gmail.com",
-      pass: "pwd@1211",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PWD,
     },
   });
 
   // Create the email message
   const message = {
-    from: "mweroabdalla@gmail.com",
+    from: process.env.EMAIL_USER,
     to: email,
     subject: "Confirm your email address",
     text: `Please click the following link to confirm your email address: http://localhost:3000/api/confirmEmail?token=${token}`,
