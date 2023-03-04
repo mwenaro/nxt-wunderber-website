@@ -3,9 +3,10 @@ import React from "react";
 // import { FaStar } from "react-icons/fa";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { IBookingForm} from "@/types";
+import { IBookingForm } from "@/types";
 import CountryOptions from "./CountryOptions";
 import { InputField, InputFieldContainer } from "./form";
+import { postFormData } from "@/utils/fetch";
 
 
 
@@ -31,11 +32,11 @@ const ACCOMMODATION_LEVELS = [
   // { label: <><FaStar /><FaStar /><FaStar /><FaStar /><FaStar /></>, value: "5 Star" },
   // { label: <><FaStar /><FaStar /><FaStar /><FaStar /></>, value: "4 Star" },
   // { label: <><FaStar /><FaStar /><FaStar /></>, value: "3 Star" },
-  {label: "", value:""},
-  {label: "5 Star" , value:"5 Star" },
-  {label: "4 Star" , value:"4 Star" },
-  {label: "3 Star" , value:"3 Star" },
- { label: "Budget", value: "Budget" },
+  { label: "", value: "" },
+  { label: "5 Star", value: "5 Star" },
+  { label: "4 Star", value: "4 Star" },
+  { label: "3 Star", value: "3 Star" },
+  { label: "Budget", value: "Budget" },
   { label: "Camping", value: "Camping" },
 ];
 
@@ -64,22 +65,20 @@ const BookingForm: React.FC = () => {
     accommodationLevel: Yup.string().required("Accommodation level is required"),
   });
 
-  const onSubmit = (values: IBookingForm) => {
-    // console.log(values);
-    fetch('/api/booking', {
-      method:"POST",
-      body:JSON.stringify(values)
-    })
-    .then(res=>res.json())
-    .then(data=>{
+  const onSubmit = async (values: IBookingForm) => {
+    console.log(values);
+    const { error, data } = await postFormData('/api/booking1', values);
+
+    if (data) {
       console.log(data)
       alert('booking was successful, check your email to proceed to payment!');
-      // console.log({in:"then in handle bookig",data:data})
-    })
-    .catch(err=>{
-      alert("An error has occured, plz try again");
-      console.log({in:"then in handle bookig",err})
-    })
+      console.log({ in: "then in handle bookig", data: data })
+    }
+    else {
+
+      alert('An error has occured, please try again');
+      console.log({ in: "then in handle bookig", error })
+    }
   };
 
   return (
@@ -125,12 +124,12 @@ const BookingForm: React.FC = () => {
           label="Departure Date"
           fieldStyles="form-input w-full"
           /> */}
-          <InputFieldContainer styles="">
-            <label className="py-2">
-              Departure Date </label>
+            <InputFieldContainer styles="">
+              <label className="py-2">
+                Departure Date </label>
               <Field type="date" name="departureDate" className="w-full form-input px-5 p-2 rounded-md " />
               <ErrorMessage name="departureDate" />
-           
+
             </InputFieldContainer>
 
 
@@ -178,7 +177,7 @@ const BookingForm: React.FC = () => {
               label="Accommodation Level"
               options={ACCOMMODATION_LEVELS}
             />
-            
+
 
             <InputField
               idAndName="otherServices"
@@ -215,7 +214,7 @@ const BookingForm: React.FC = () => {
         <Field type="text" name="specialInterests" />
       </label> */}
 
-            <button type="submit" className="w-5/6 btn btn-primary p-3 mb-3 mx-auto">Submit</button>
+            <button type="submit" className="w-full btn btn-primary p-3 mb-3 mx-auto">Submit</button>
           </div>
         </Form>
       )}
