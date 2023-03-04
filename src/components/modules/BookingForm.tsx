@@ -41,6 +41,7 @@ const ACCOMMODATION_LEVELS = [
 ];
 
 const BookingForm: React.FC = () => {
+  // consts
   const initialValues: IBookingForm = {
     fullName: "",
     email: "",
@@ -49,8 +50,10 @@ const BookingForm: React.FC = () => {
     departureDate: "",
     safariType: "",
     safariDuration: "",
-    accommodationLevel: "",
-    otherServices: [],
+    // accommodationLevel: "",
+    // otherServices: [],
+    participants: { adults: 1, kids: 0 },
+
     specialInterests: "",
   };
 
@@ -62,28 +65,51 @@ const BookingForm: React.FC = () => {
     departureDate: Yup.string().required("Departure date is required"),
     safariType: Yup.string().required("Safari type is required"),
     safariDuration: Yup.string().required("Safari duration is required"),
-    accommodationLevel: Yup.string().required("Accommodation level is required"),
+    // participants:Yup.required("")
+    // participants.kids: Yup.string().required("Safari duration is required"),
+
   });
 
   const onSubmit = async (values: IBookingForm) => {
-    console.log(values);
-    const { error, data } = await postFormData('/api/booking1', values);
+
+    const adults = values.participants?.adults || 0;
+    const kids = values.participants?.kids || 0;
+    // console.log(values);
+    if (adults && adults <= 0) {
+
+      if (kids && kids < 0 || adults < 0) {
+        alert('Error ! Neither kids or Adults can have -ve adults!');
+        return
+      }
+
+      alert('number of adults cannot be 0');
+
+      return
+    }
+
+    const { error, data } = await postFormData('/api/booking', values);
+
 
     if (data) {
+
+
       console.log(data)
       alert('booking was successful, check your email to proceed to payment!');
-      console.log({ in: "then in handle bookig", data: data })
+      // console.log({ data })
+
+
     }
     else {
 
       alert('An error has occured, please try again');
-      console.log({ in: "then in handle bookig", error })
+      console.log({ error })
     }
+    location.pathname = '/booking'
   };
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
+      {({ values, errors, touched, resetForm, handleChange, handleBlur, handleSubmit }) => (
         <Form >
           <div className="flex flex-col gap-2 mx-auto max-w-md justify-center ">
             <InputField
@@ -125,9 +151,11 @@ const BookingForm: React.FC = () => {
           fieldStyles="form-input w-full"
           /> */}
             <InputFieldContainer styles="">
-              <label className="py-2">
+              <label className="pt-2">
                 Departure Date </label>
-              <Field type="date" name="departureDate" className="w-full form-input px-5 p-2 rounded-md " />
+              <Field type="date" 
+              
+              name="departureDate" className="w-full form-input px-5 p-2 rounded-md " />
               <ErrorMessage name="departureDate" />
 
             </InputFieldContainer>
@@ -140,6 +168,31 @@ const BookingForm: React.FC = () => {
               label="Safari Type"
 
             />
+            <div className="flex flex-col w-full">
+              <label className="p4">Number of People:</label>
+              <div className="grid grid-cols-2 gap-3 pl-5">
+                <InputField
+                  idAndName="participants.adults"
+                  styles="col-span-1"
+                  type="number"
+                  min={1}
+                  required='required'
+                  options={SAFARI_TYPES}
+                  label="Adults"
+
+                />
+                <InputField
+                  idAndName="participants.kids"
+                  styles="col-span-1 "
+                  type="number"
+                  min={0}
+                  options={SAFARI_TYPES}
+                  label="Kids"
+
+                />
+              </div>
+
+            </div>
 
 
 
@@ -171,15 +224,15 @@ const BookingForm: React.FC = () => {
               </Field>
               <ErrorMessage name="safariDuration" />
             </label> */}
-            <InputField
+            {/* <InputField
               idAndName="accommodationLevel"
               type="select"
               label="Accommodation Level"
               options={ACCOMMODATION_LEVELS}
-            />
+            /> */}
 
 
-            <InputField
+            {/* <InputField
               idAndName="otherServices"
               type="checkbox"
 
@@ -191,7 +244,7 @@ const BookingForm: React.FC = () => {
 
               label="Other Services Needed"
               fieldStyles="form-input w-full"
-            />
+            /> */}
 
             {/* <label className="py-2">
         Other Services Needed:
@@ -203,18 +256,20 @@ const BookingForm: React.FC = () => {
         Unique Experiences
       </label> */}
 
-            <InputField
-              idAndName="specialInterests"
 
-              label="Special Interests"
-              fieldStyles="form-input w-full"
-            />
-            {/* <label className="py-2">
-        Special Interests:
-        <Field type="text" name="specialInterests" />
-      </label> */}
 
-            <button type="submit" className="w-full btn btn-primary p-3 mb-3 mx-auto">Submit</button>
+            <InputFieldContainer styles="">
+              <label className="pt-2">
+                Special Ineterets </label>
+              <Field as="textarea" rows={5} name="specialInterests" className="w-full form-textarea px-5 p-2 rounded-md " />
+              <ErrorMessage name="specialInterests" />
+
+            </InputFieldContainer>
+
+            <div className="p-4">
+              <button type="submit" className="w-full btn btn-primary p-3   mx-auto">Submit</button>
+            </div>
+
           </div>
         </Form>
       )}

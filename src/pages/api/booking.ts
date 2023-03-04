@@ -1,7 +1,7 @@
-import { datastore, guestDb } from "../../utils/db";
+import {  Database, } from "../../utils/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { IGuest } from "@/types";
-
+ const guestDb = Database();
 type Data =
   | {
       name: string;

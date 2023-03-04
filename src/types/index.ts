@@ -12,7 +12,10 @@ export interface IInputFiledProps {
     fieldStyles?:string
     labelStyles?:string
     messageStyles?:string
+    required?:'required'
     value?:any
+    min?:number
+    max?:number
     options?:IRadioCheckboxOption[]
 }
 
@@ -27,9 +30,11 @@ export interface IBookingForm {
     departureDate: string;
     safariType: string;
     safariDuration: string;
-    accommodationLevel: string;
-    otherServices: string[];
+    participants?:{kids?:number, adults?:number, infants?:number}
+    accommodationLevel?: string;
+    otherServices?: string[];
     specialInterests: string;
+   
   }
 
   export type IGuest = IBookingForm & {

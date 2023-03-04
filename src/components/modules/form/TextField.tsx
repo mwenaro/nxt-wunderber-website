@@ -23,7 +23,7 @@ const TextField = (
             <Field
                 type={`${type ? type : 'text'}`}
                 name={idAndName}
-                className={`px-5 p-2 rounded-md  ${fieldStyles}`}
+                className={`px-5 p-2 rounded-md w-full  ${fieldStyles}`}
                 placeholder={placeholder || label}
 
                 {...rest}
