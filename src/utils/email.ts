@@ -34,7 +34,7 @@ let result:any={error:"",flag:false}
   } catch (error:any) {
 
     console.log(error.message);
-    return {...result, error}
+    return {...result, error:error.message}
   }
 
 };
