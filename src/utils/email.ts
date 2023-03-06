@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 
 export const sendConfirmationEmail = async (email:string='mweroabdalla@gmail.com', name:string='Mwero Abdalla', amount:number=1200) => {
+let result:any={error:"",flag:false}
   try {
     // Create a nodemailer transport object
     const transporter = nodemailer.createTransport({
@@ -27,10 +28,13 @@ export const sendConfirmationEmail = async (email:string='mweroabdalla@gmail.com
     // Send the email
     const info = await transporter.sendMail(message);
     console.log(`Email sent to ${email}: ${info.response}`);
+    return {...result, flag:true}
   } catch (error:any) {
 
     console.log(error.message);
+    return {...result, error}
   }
+
 };
 
 

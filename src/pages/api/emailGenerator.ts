@@ -43,6 +43,6 @@ export default async function handler(
   //   res.status(500).send("Error sending confirmation email");
   // }
 
-  await sendConfirmationEmail();
-  res.json({msg:"Imefika!"})
+ const {error, flag} = await sendConfirmationEmail();
+  res.json({flag, error})
 }

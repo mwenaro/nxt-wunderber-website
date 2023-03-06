@@ -1,7 +1,7 @@
-import {  Database, } from "../../utils/db";
+import { Database } from "../../utils/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { IGuest } from "@/types";
- const guestDb = Database();
+const guestDb = Database();
 type Data =
   | {
       name: string;
@@ -33,5 +33,11 @@ export default function handler(
           .catch();
       })
       .catch((err: any) => console.log({ insert: "insert", err }));
+  } else {
+
+  guestDb
+    .find({})
+    .then((docs: any) => res.status(200).json(docs))
+    .catch((err: any) => res.status(401).json(err));
   }
 }

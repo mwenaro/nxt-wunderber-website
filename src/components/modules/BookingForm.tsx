@@ -104,7 +104,7 @@ const BookingForm: React.FC = () => {
       alert('An error has occured, please try again');
       console.log({ error })
     }
-    location.pathname = '/booking'
+    // location.pathname = '/booking'
   };
 
   return (
