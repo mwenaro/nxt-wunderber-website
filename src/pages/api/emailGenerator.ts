@@ -1,9 +1,8 @@
 import { sendConfirmationEmail } from "@/utils/email";
 import { NextApiRequest, NextApiResponse } from "next";
-import nodemailer from "nodemailer";
-import { v4 as uuidv4 } from "uuid";
 
-const confirmationTokens: any = {}; // This is where we store the confirmation tokens
+
+// const confirmationTokens: any = {}; // This is where we store the confirmation tokens
 
 export default async function handler(
   req: NextApiRequest,

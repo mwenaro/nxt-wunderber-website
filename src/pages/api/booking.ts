@@ -24,12 +24,14 @@ export default function handler(
         guestDb
           .find({})
           .then(async (docs: any) =>{
-            if(await sendConfirmationEmail(newDoc.email, newDoc.fullName)){}
+             const {error:er, flag} = await sendConfirmationEmail(JSON.parse(req.body).email,JSON.parse(req.body).fullName);
+             res.json({emailRes:{error:er,flag}});
+             return
             res
               .status(200)
               .json([
                 ...docs.filter((_doc: any) => _doc._id !== newDoc._id),
-                newDoc,
+                newDoc,{emailRes:{error:er,flag}}
               ])
             })
           .catch();
