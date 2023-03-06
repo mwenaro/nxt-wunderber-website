@@ -40,3 +40,8 @@ export interface IBookingForm {
   export type IGuest = IBookingForm & {
     _id?:string|any
   }|{}
+
+
+export const EMAIL_USER= process.env.EMAIL_USER
+export const EMAIL_PWD= process.env.EMAIL_PWD
+export const EMAIL_HOST= process.env.EMAIL_HOST
