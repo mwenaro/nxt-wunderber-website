@@ -1,6 +1,7 @@
 import { Database } from "../../utils/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { IGuest } from "@/types";
+import { sendConfirmationEmail } from "@/utils/email";
 const guestDb = Database();
 type Data =
   | {
@@ -22,14 +23,15 @@ export default function handler(
       .then((newDoc: any) => {
         guestDb
           .find({})
-          .then((docs: any) =>
+          .then(async (docs: any) =>{
+            if(await sendConfirmationEmail(newDoc.email, newDoc.fullName)){}
             res
               .status(200)
               .json([
                 ...docs.filter((_doc: any) => _doc._id !== newDoc._id),
                 newDoc,
               ])
-          )
+            })
           .catch();
       })
       .catch((err: any) => console.log({ insert: "insert", err }));
