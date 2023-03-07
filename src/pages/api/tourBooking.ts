@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { IGuest } from "@/types";
-import { sendConfirmationEmail } from "@/lib/nodemailer";
+// import { sendConfirmationEmail } from "@/lib/nodemailer";
 import { prisma } from "@/lib";
 
 
@@ -20,12 +20,12 @@ export default async function handler(
       const createdBooking = await prisma.tourBooking.create({data})
       // console.log({createdBooking})
       if(createdBooking){
-      const {error, flag} = await sendConfirmationEmail(JSON.parse(req.body).email,JSON.parse(req.body).fullName);
-      res.status(200).json({...resp, flag:true,error:[...error] });
+      // const {error, flag} = await sendConfirmationEmail(JSON.parse(req.body).email,JSON.parse(req.body).fullName);
+      res.status(200).json({...resp, flag:true, createdBooking });
       return
       }
       let msg="There was an issue creating the user"
-      res.status(200).json({...resp, flag:true,error:msg });
+      res.status(200).json({...resp, flag:true,error:msg , createdBooking});
       // res.status(200).json({...resp})
       
     } catch (error) {
