@@ -22,7 +22,7 @@ jobs:
           npm run build
 
         env:
-          DATABASE_URL:${{secrets.DB_URL}}
+          DATABASE_URL: ${{secrets.DB_URL}}
         
       - name: 📂 Sync FrontEnd files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
