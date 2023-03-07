@@ -16,10 +16,10 @@ jobs:
         with:
           node-version: "16.x"
 
-      - name: 🔨 pkg installation and build
-        run: |
-          npm install
-          npm run build
+      # - name: 🔨 pkg installation and build
+      #   run: |
+      #     # npm install
+      #     npm run build
         
       - name: 📂 Sync FrontEnd files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
