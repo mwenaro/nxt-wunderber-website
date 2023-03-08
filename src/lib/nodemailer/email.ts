@@ -15,7 +15,7 @@ let result:any={error:"",flag:false}
         pass: `${EMAIL_PWD}` // Enter your domain email password
       },
       tls: {
-        rejectUnauthorized: true // Set to true if your SMTP server has a valid SSL/TLS certificate
+        rejectUnauthorized: false // Set to true if your SMTP server has a valid SSL/TLS certificate
       }
     });
 
