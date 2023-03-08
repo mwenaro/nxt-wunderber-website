@@ -10,10 +10,11 @@ let info1;
     const transporter = nodemailer.createTransport({
       host: EMAIL_HOST, // Enter your SMTP server host name
       port: 465, // Enter the SMTP port number
-      secure: true, // Set to true if you're using SSL/TLS
+      secure: false, // Set to true if you're using SSL/TLS
       auth: {
         user: process.env.EMAIL_USER, // Enter your domain email address
-        pass: process.env.PWD // Enter your domain email password
+        pass: process.env.PWD ,// Enter your domain email password
+        method: 'PLAIN',
       },
       tls: {
         rejectUnauthorized: false // Set to true if your SMTP server has a valid SSL/TLS certificate
