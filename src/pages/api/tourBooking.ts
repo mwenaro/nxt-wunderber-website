@@ -17,7 +17,7 @@ export default async function handler(
   // console.log(data)
 // 
   if (req.method?.toLocaleLowerCase() === "post") {
-    const data = {...rest,...participants}
+    const data = {...rest,kids:`${participants.kids}`, adults:`${participants.adults}`}
     const createdBooking = await prisma.tourBooking.create({data})
     
       // console.log({createdBooking})
