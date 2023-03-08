@@ -88,7 +88,8 @@ const BookingForm: React.FC = () => {
     }
 
     const { error, data } = await postFormData('/api/tourBooking', values);
-
+console.log({error, data})
+return;
 
     if (data) {
 

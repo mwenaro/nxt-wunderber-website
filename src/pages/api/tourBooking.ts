@@ -16,6 +16,18 @@ export default async function handler(
   const data = {...rest,...participants};
 
   if (req.method?.toLocaleLowerCase() === "post") {
+
+    const createdBooking = await prisma.tourBooking.create({data})
+      // console.log({createdBooking})
+      if(createdBooking){
+      // const {error, flag} = await sendConfirmationEmail(JSON.parse(req.body).email,JSON.parse(req.body).fullName);
+      res.status(200).json({...resp, flag:true, createdBooking });
+      return
+      }
+      let msg="There was an issue creating the user"
+      res.status(200).json({...resp, flag:true,error:msg , createdBooking});
+      return;
+      
     try {
       const createdBooking = await prisma.tourBooking.create({data})
       // console.log({createdBooking})
