@@ -13,7 +13,7 @@ let info1;
       secure: false, // Set to true if you're using SSL/TLS
       auth: {
         user: process.env.EMAIL_USER, // Enter your domain email address
-        pass: process.env.PWD ,// Enter your domain email password
+        pass: process.env.EMAIL_PWD ,// Enter your domain email password
         method: 'PLAIN',
       },
       tls: {
