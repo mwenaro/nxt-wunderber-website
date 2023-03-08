@@ -21,7 +21,7 @@ export default async function handler(
       // console.log({createdBooking})
       // if(createdBooking){
       // const {error, flag} = await sendConfirmationEmail(JSON.parse(req.body).email,JSON.parse(req.body).fullName);
-      res.status(200).json({ createdBooking });
+      res.status(200).json({ createdBooking, data });
       return
       // }
       let msg="There was an issue creating the user"
