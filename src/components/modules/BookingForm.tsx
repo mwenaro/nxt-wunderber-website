@@ -87,8 +87,14 @@ const BookingForm: React.FC = () => {
       return
     }
 
-    const { error, data } = await postFormData('/api/tourBooking', values);
-console.log({error, data})
+    fetch('/api/tourBooking', {method:"POST", body:JSON.stringify(values)})
+    .then(res=>res.json())
+    .then(data=>console.log({data}))
+    .catch(err=>console.log({err}));
+    
+let data, error =[]
+//     const { error, data } = await postFormData('/api/tourBooking', values);
+// console.log({error, data})
 return;
 
     if (data) {
