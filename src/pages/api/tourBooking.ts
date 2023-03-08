@@ -19,11 +19,11 @@ export default async function handler(
 
     const createdBooking = await prisma.tourBooking.create({data})
       // console.log({createdBooking})
-      if(createdBooking){
+      // if(createdBooking){
       // const {error, flag} = await sendConfirmationEmail(JSON.parse(req.body).email,JSON.parse(req.body).fullName);
-      res.status(200).json({...resp, flag:true, createdBooking });
+      res.status(200).json({ createdBooking });
       return
-      }
+      // }
       let msg="There was an issue creating the user"
       res.status(200).json({...resp, flag:true,error:msg , createdBooking});
       return;
