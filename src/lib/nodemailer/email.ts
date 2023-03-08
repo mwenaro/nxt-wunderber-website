@@ -16,9 +16,9 @@ let info1;
         pass: process.env.EMAIL_PWD ,// Enter your domain email password
         method: 'PLAIN',
       },
-      tls: {
-        rejectUnauthorized: false // Set to true if your SMTP server has a valid SSL/TLS certificate
-      }
+      // tls: {
+      //   rejectUnauthorized: false // Set to true if your SMTP server has a valid SSL/TLS certificate
+      // }
     });
 
     // Define the email message

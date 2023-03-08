@@ -14,6 +14,7 @@ export default async function handler(
 ) {
   const {participants, ...rest} = JSON.parse(req.body)
   const data = JSON.parse({...rest,...participants});
+  console.log(data)
 
   if (req.method?.toLocaleLowerCase() === "post") {
 
