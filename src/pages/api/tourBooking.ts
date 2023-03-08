@@ -13,7 +13,7 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
   const {participants, ...rest} = JSON.parse(req.body)
-  const data = {...rest,...participants};
+  const data = JSON.parse({...rest,...participants});
 
   if (req.method?.toLocaleLowerCase() === "post") {
 
