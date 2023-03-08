@@ -13,12 +13,13 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
   const {participants, ...rest} = JSON.parse(req.body)
-  const data = JSON.parse({...rest,...participants});
-  console.log(data)
-
+  // const data = {...rest,kids:participants.kids+"", adults:}
+  // console.log(data)
+// 
   if (req.method?.toLocaleLowerCase() === "post") {
-
+    const data = {...rest,...participants}
     const createdBooking = await prisma.tourBooking.create({data})
+    
       // console.log({createdBooking})
       // if(createdBooking){
       // const {error, flag} = await sendConfirmationEmail(JSON.parse(req.body).email,JSON.parse(req.body).fullName);
