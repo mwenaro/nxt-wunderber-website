@@ -3,9 +3,23 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { images } from '../../assets/images';
 import { PageWrapper } from '@/components/modules';
+import { IImage } from '@/types';
 
 
 const Gallery: React.FC = () => {
+  const imgPath = '/assets/images/16x9/';
+
+ let _images: IImage[] = [];
+ for (let i = 1; i <= 12; i++) {
+ _images.push(
+  {
+    src:`${imgPath}${i}.jpg`,
+    des:`Image ${i}`
+}
+ );
+  
+ }
+
   return (
     <PageWrapper>
     <div className="bg-gray-200 p-6">
@@ -16,7 +30,7 @@ const Gallery: React.FC = () => {
 
 
           {
-            images.sort(()=>Math.random()*0.5).map((pic: { src: string, des: string }) =>
+            _images.sort(()=>Math.random()*0.5).map((pic: { src: string, des: string }) =>
               <motion.img
               key={pic.src}
                 src={pic.src}
