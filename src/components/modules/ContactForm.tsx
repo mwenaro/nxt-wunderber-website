@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { Formik, FormikProps, Form } from 'formik';
 import { IFormField, InputField } from './form';
 import { Button } from './buttons';
+import { postFormData } from '@/utils/fetch';
 
 
 
@@ -43,6 +44,18 @@ const SignupSchema = Yup.object().shape({
     message: Yup.string()
         .required('Message is Required'),
 });
+
+const onSubmit = async (values: FormValues) => {
+    // console.log(values)
+    try {
+      let res =  await postFormData('contact', values);
+      let data = await res.json();
+      console.log({data})
+    } catch (error) {
+      console.log(error)
+      alert('There was an error, please try again')
+    }
+}
 
 const ActualForm = (props: FormikProps<FormValues>) => (
     <Form {...props}>

@@ -50,7 +50,7 @@ const BookingForm: React.FC = () => {
     phone: "",
     country: "",
     departureDate: "",
-    safariType: "",
+    // safariType: "",
     safariDuration: "",
     // accommodationLevel: "",
     // otherServices: [],
@@ -66,7 +66,7 @@ const BookingForm: React.FC = () => {
     country: Yup.string().required("Country is required"),
     departureDate: Yup.date().required("Departure date is required"),
     // safariType: Yup.string().required("Safari type is required"),
-    safariDuration: Yup.string().required("Safari duration is required"),
+    // safariDuration: Yup.string().required("Safari duration is required"),
     // // participants:Yup.object().optional(),
     specialInterests: Yup.string(),
 
@@ -76,6 +76,16 @@ const BookingForm: React.FC = () => {
 
   const onSubmit = async (values: IBookingForm) => {
     console.log(values)
+    try {
+      let res =  await postFormData('booking', values);
+      let data = await res.json();
+      console.log({data})
+    } catch (error) {
+      console.log(error)
+      alert('There was an error, please try again')
+    }
+  
+    
   };
 
   return (
@@ -149,12 +159,12 @@ const BookingForm: React.FC = () => {
 
 
 
-            <InputField
+            {/* <InputField
               idAndName="safariDuration"
               type="select"
               // label="Safari Duration"
               options={SAFARI_DURATIONS}
-            />
+            /> */}
 
             <InputField
               idAndName="specialInterests"

@@ -1,9 +1,9 @@
 import { Database } from "../../utils/db";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IGuest } from "@/types";
+import { EMAIL_USER, IGuest } from "@/types";
 import { sendConfirmationEmail } from "@/lib/nodemailer";
-
-
+import { prisma } from "@/lib";
+import mailSender from "@/utils/phpmailer";
 
 const guestDb = Database();
 type Data =
@@ -16,35 +16,62 @@ type IResData = [Data | { err: any; code: any }] & {
   msg?: string;
 };
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data | IGuest[]>
 ) {
-  if (req.method?.toLocaleLowerCase() === "post") {
-    guestDb
-      .insert(JSON.parse(req.body))
-      .then((newDoc: any) => {
-        guestDb
-          .find({})
-          .then(async (docs: any) =>{
-             const {error:er, flag} = await sendConfirmationEmail(JSON.parse(req.body).email,JSON.parse(req.body).fullName);
-             res.json({emailRes:{error:er,flag}});
-             return
-            res
-              .status(200)
-              .json([
-                ...docs.filter((_doc: any) => _doc._id !== newDoc._id),
-                newDoc,{emailRes:{error:er,flag}}
-              ])
-            })
-          .catch();
-      })
-      .catch((err: any) => console.log({ insert: "insert", err }));
-  } else {
+  const { body } = req;
+  const {participants, ...others} = JSON.parse(body);
+  const data = {
+    ...others, ...participants
+  };
 
-  guestDb
-    .find({})
-    .then((docs: any) => res.status(200).json(docs))
-    .catch((err: any) => res.status(401).json(err));
+  let result: { error: any; data: any; email: any; emailError: any } = {
+    error: "",
+    data: "",
+    email: "",
+    emailError: "",
+  };
+
+  if (req.method?.toLocaleLowerCase() === "post") {
+    
+    try {
+      const createdTour = await prisma.tourBooking.create({
+        data,
+      });
+      
+      result = { ...result, data: createdTour };
+      try {
+        mailSender(
+          body.email,
+          EMAIL_USER || "",
+          "Booking Confirmation",
+          `Dear ${data.fullName}, \n
+           This is to confirm that you have booked for tour with is which \n
+           is due on ${data.departureDate}. \n
+           Feel free to reach us should you have any questions.\n\n
+           
+           Regards,\n
+           \t Wunderber Kenia Adventures.
+           `
+        )
+          .then((res) => res.json())
+          .then((data2) => {
+            result = {...result, email:data2}
+          });
+      } catch (error) {
+        console.log(error)
+        console.log(error)
+        result = {...result, emailError:error}
+      }
+
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ msg: "An error", resul:{...result, error} });
+
+    }
+  } else {
+    const tours = await prisma.tourBooking.findMany();
+    res.status(200).json(tours);
   }
 }
