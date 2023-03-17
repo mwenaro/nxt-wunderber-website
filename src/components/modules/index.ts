@@ -7,5 +7,6 @@ export {default as Map}  from './Map'
 export {default as BookingForm}  from './BookingForm'
 export {default as CountryOptions}  from './CountryOptions'
 export * from './buttons'
+export * from './form'
 
 

@@ -66,7 +66,7 @@ const ActualForm = (props: FormikProps<FormValues>) => (
     </Form>
 );
 
-export default function ContactForm() {
+export default function BookForm() {
     return (
         <div className='p- sm:p-5 flex flex-col'>
             <h3>Contact</h3>

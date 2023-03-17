@@ -1,13 +1,14 @@
 "use client"
 import React from "react";
 // import { FaStar } from "react-icons/fa";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { IBookingForm } from "@/types";
 import CountryOptions from "./CountryOptions";
 import { InputField, InputFieldContainer } from "./form";
 import { postFormData } from "@/utils/fetch";
 import { API } from "@/constants";
+import { Button } from "./buttons";
 
 
 
@@ -63,90 +64,51 @@ const BookingForm: React.FC = () => {
     email: Yup.string().email("Invalid email address").required("Email is required"),
     phone: Yup.string().required("Phone number is required"),
     country: Yup.string().required("Country is required"),
-    departureDate: Yup.string().required("Departure date is required"),
-    safariType: Yup.string().required("Safari type is required"),
+    departureDate: Yup.date().required("Departure date is required"),
+    // safariType: Yup.string().required("Safari type is required"),
     safariDuration: Yup.string().required("Safari duration is required"),
-    // participants:Yup.required("")
+    // // participants:Yup.object().optional(),
+    specialInterests: Yup.string(),
+
     // participants.kids: Yup.string().required("Safari duration is required"),
 
   });
 
   const onSubmit = async (values: IBookingForm) => {
-
-    const adults = values.participants?.adults || 0;
-    const kids = values.participants?.kids || 0;
-    // console.log(values);
-    if (adults && adults <= 0) {
-
-      if (kids && kids < 0 || adults < 0) {
-        alert('Error ! Neither kids or Adults can have -ve adults!');
-        return
-      }
-
-      alert('number of adults cannot be 0');
-
-      return
-    }
-// console.log(location)
-
-
-    fetch('/api/tourBooking', {method:"POST", body:JSON.stringify(values)})
-    .then(res=>res.json())
-    .then(data=>console.log({data}))
-    .catch(err=>console.log({err}));
-    
-let data, error =[]
-//     const { error, data } = await postFormData('/api/tourBooking', values);
-// console.log({error, data})
-return;
-
-    if (data) {
-
-
-      console.log(data)
-      alert('booking was successful, check your email to proceed to payment!');
-      // console.log({ data })
-
-
-    }
-    else {
-
-      alert('An error has occured, please try again');
-      console.log({ error })
-    }
-    // location.pathname = '/booking'
+    console.log(values)
   };
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      {({ values, errors, touched, resetForm, handleChange, handleBlur, handleSubmit }) => (
-        <Form >
-          <div className="flex flex-col gap-2 mx-auto max-w-md justify-center ">
+      {(props) => (
+        <Form  >
+          <div className="flex flex-col  mx-auto max-w-md justify-center py-2 sm:py-5">
+            <h3 className="text-center font-bold text-2xl">Fill the form to book </h3>
             <InputField
               idAndName="fullName"
               type="text"
-              label="Full Name"
+              placeholder="Full Name"
               fieldStyles="form-input w-full"
             />
 
             <InputField
               idAndName="email"
               type="email"
-              label="Email Address"
+              placeholder="Email Address"
               fieldStyles="form-input w-full"
             />
 
             <InputField
               idAndName="phone"
               type="tel"
-              label="Phone Number"
+              placeholder="Phone Number"
               fieldStyles="form-input w-full"
             />
 
             <InputField
               idAndName="country"
               type="select"
-              label="Country"
+            // label="Country"
 
             >
               <option value={''}> --- Country --- </option>
@@ -154,31 +116,14 @@ return;
             </InputField>
 
 
-            {/* <InputField 
-          idAndName="departureDate"
-          type="date"
-          label="Departure Date"
-          fieldStyles="form-input w-full"
-          /> */}
-            <InputFieldContainer styles="">
-              <label className="pt-2">
-                Departure Date </label>
-              <Field type="date" 
-              
-              name="departureDate" className="w-full form-input px-5 p-2 rounded-md " />
-              <ErrorMessage name="departureDate" />
-
-            </InputFieldContainer>
-
-
             <InputField
-              idAndName="safariType"
-              type="select"
-              options={SAFARI_TYPES}
-              label="Safari Type"
+              idAndName="departureDate"
+              type="date"
+              label="Departure Date"
 
             />
-            <div className="flex flex-col w-full">
+
+            <div className="flex flex-col w-full px-3">
               <label className="p4">Number of People:</label>
               <div className="grid grid-cols-2 gap-3 pl-5">
                 <InputField
@@ -187,7 +132,6 @@ return;
                   type="number"
                   min={1}
                   required='required'
-                  options={SAFARI_TYPES}
                   label="Adults"
 
                 />
@@ -196,7 +140,6 @@ return;
                   styles="col-span-1 "
                   type="number"
                   min={0}
-                  options={SAFARI_TYPES}
                   label="Kids"
 
                 />
@@ -206,79 +149,25 @@ return;
 
 
 
-            {/* <label className="py-2">
-        Safari Type:
-        <Field as="select" className="form-select w-full" name="safariType">
-          {SAFARI_TYPES.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </Field>
-        <ErrorMessage name="safariType" />
-      </label> */}
             <InputField
               idAndName="safariDuration"
               type="select"
-              label="Safari Duration"
+              // label="Safari Duration"
               options={SAFARI_DURATIONS}
             />
-            {/* <label className="py-2">
-              Safari Duration:
-              <Field as="select" className="form-select w-full" name="safariDuration">
-                {SAFARI_DURATIONS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="safariDuration" />
-            </label> */}
-            {/* <InputField
-              idAndName="accommodationLevel"
-              type="select"
-              label="Accommodation Level"
-              options={ACCOMMODATION_LEVELS}
-            /> */}
 
+            <InputField
+              idAndName="specialInterests"
+              type="textarea"
+              placeholder="Special Ineterets"
 
-            {/* <InputField
-              idAndName="otherServices"
-              type="checkbox"
-
-              options={[
-                { label: "Activities", value: "Activities" },
-                { label: "Tour Guides", value: "Tour Guides" },
-                { label: "Unique Experiences", value: "Unique Experiences" },
-              ]}
-
-              label="Other Services Needed"
-              fieldStyles="form-input w-full"
-            /> */}
-
-            {/* <label className="py-2">
-        Other Services Needed:
-        <Field type="checkbox" name="otherServices" value="Activities" />
-        Activities
-        <Field type="checkbox" name="otherServices" value="Tour Guides" />
-        Tour Guides
-        <Field type="checkbox" name="otherServices" value="Unique Experiences" />
-        Unique Experiences
-      </label> */}
+            />
 
 
 
-            <InputFieldContainer styles="">
-              <label className="pt-2">
-                Special Ineterets </label>
-              <Field as="textarea" rows={5} name="specialInterests" className="w-full form-textarea px-5 p-2 rounded-md " />
-              <ErrorMessage name="specialInterests" />
 
-            </InputFieldContainer>
-
-            <div className="p-4">
-              <button type="submit" className="w-full btn btn-primary p-3   mx-auto">Submit</button>
-            </div>
+            <Button type="submit" styles="my-5">Submit</Button>
+           
 
           </div>
         </Form>

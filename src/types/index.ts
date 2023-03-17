@@ -27,8 +27,8 @@ export interface IBookingForm {
     email: string;
     phone: string;
     country: string;
-    departureDate: string;
-    safariType: string;
+    departureDate?: string;
+    safariType?: string;
     safariDuration: string;
     participants?:{kids?:number, adults?:number, infants?:number}
     accommodationLevel?: string;

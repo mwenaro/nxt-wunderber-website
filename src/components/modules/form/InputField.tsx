@@ -1,12 +1,13 @@
 "use client"
 
-import { IInputFiledProps } from "@/types"
+import { IInputFiledProps } from "./types"
 import { ReactNode } from "react"
 import InputFieldContainer from "./InputFieldContainer"
 
 import RadioCheckInput from "./RadioCheckInput"
 import SelectField from "./SelectField"
 import TextField from "./TextField"
+import TextArea from "./TextArea"
 
 
 const InputField = ({styles = "", type = "text",children, ...otherProps}: IInputFiledProps & {children?:ReactNode}) => {
@@ -21,6 +22,9 @@ const InputField = ({styles = "", type = "text",children, ...otherProps}: IInput
    case 'select':
   
         return <InputFieldContainer styles={styles}> <SelectField type= {type} {...otherProps} >{children}</SelectField></InputFieldContainer>
+   case 'textarea':
+  
+        return <InputFieldContainer styles={styles}> <TextArea  {...otherProps} >{children}</TextArea></InputFieldContainer>
 
     
     }

@@ -1,5 +1,5 @@
 "use client"
-import { IInputFiledProps, IRadioCheckboxOption } from "@/types";
+import { IInputFiledProps, IRadioCheckboxOption } from "./types";
 import { ErrorMessage, Field} from "formik";
 
 const RadioCheckInput = ({

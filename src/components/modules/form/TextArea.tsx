@@ -3,7 +3,7 @@
 import { ErrorMessage, Field } from "formik";
 import { IInputFiledProps } from "./types";
 
-const TextField = (
+const TextArea = (
     {
         label,
         idAndName,
@@ -25,10 +25,13 @@ const TextField = (
         <div>
 
             <Field
-                type={`${type ? type : 'text'}`}
+                as='textarea'
+                // type={`${type ? type : 'text'}`}
                 name={idAndName}
                 className={`px-5 p-2 rounded-md w-full  ${fieldStyles}`}
                 placeholder={placeholder || label}
+                rows ={5}
+                
 
                 {...rest}
             />
@@ -39,4 +42,4 @@ const TextField = (
     </>
 
 
-export default TextField;
+export default TextArea;

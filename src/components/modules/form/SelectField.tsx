@@ -1,7 +1,7 @@
 "use client"
-import { IInputFiledProps } from "@/types";
 import { ErrorMessage, Field} from "formik";
 import { ReactNode } from "react";
+import { IInputFiledProps } from "./types";
 
 const SelectField = (
  {
@@ -16,8 +16,10 @@ const SelectField = (
 }: IInputFiledProps & {children:ReactNode} ) => 
 
    <>
-        <label className={` ${labelStyles}`}>
-            <span>  {label} </span></label>
+       {
+            label ? <label className={` ${labelStyles}`}>
+                <span>  {label} </span></label> : ''
+        }
         <div>
 
             <Field as ="select"
@@ -34,7 +36,7 @@ const SelectField = (
             children
             }
             </Field>
-            <ErrorMessage component={'div'} name={idAndName} className={`text-red-500 p-5 ${messageStyles}`} />
+            <ErrorMessage component={'div'} name={idAndName} className={`text-red-500 px-5 ${messageStyles}`} />
 
 
         </div>
