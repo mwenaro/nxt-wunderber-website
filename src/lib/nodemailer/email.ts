@@ -12,8 +12,8 @@ let info1;
       port: 465, // Enter the SMTP port number
       secure: false, // Set to true if you're using SSL/TLS
       auth: {
-        user: process.env.EMAIL_USER, // Enter your domain email address
-        pass: process.env.EMAIL_PWD ,// Enter your domain email password
+        user: process.env.NEXT_PUBLIC_EMAIL_USER, // Enter your domain email address
+        pass: process.env.NEXT_PUBLIC_EMAIL_PWD ,// Enter your domain email password
         method: 'PLAIN',
       },
       // tls: {
@@ -23,7 +23,7 @@ let info1;
 
     // Define the email message
     const message = {
-      from: process.env.EMAIL_USER, // Use your domain email address as the sender
+      from: process.env.NEXT_PUBLIC_EMAIL_USER, // Use your domain email address as the sender
       to: email,
       subject: 'Confirmation of Booking',
       text: `Dear ${name},\n\nThank you for booking with us. We have received your payment of $${amount} and your booking is confirmed.\n\nWe look forward to seeing you on your tour!\n\nBest regards,\nThe Tour Company`

@@ -7,6 +7,7 @@ import { IBookingForm } from "@/types";
 import CountryOptions from "./CountryOptions";
 import { InputField, InputFieldContainer } from "./form";
 import { postFormData } from "@/utils/fetch";
+import { API } from "@/constants";
 
 
 
@@ -86,6 +87,8 @@ const BookingForm: React.FC = () => {
 
       return
     }
+// console.log(location)
+
 
     fetch('/api/tourBooking', {method:"POST", body:JSON.stringify(values)})
     .then(res=>res.json())

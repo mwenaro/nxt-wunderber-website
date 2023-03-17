@@ -6,7 +6,7 @@ import { prisma } from "@/lib";
 
 
 
-const resp:{error:string|string,flag:boolean}={flag:false,error:""};
+// const resp:{error:string|string,flag:boolean}={flag:false,error:""};
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,7 +17,7 @@ export default async function handler(
   // console.log(data)
 // 
   if (req.method?.toLocaleLowerCase() === "post") {
-    const data = {...rest,kids:`${participants.kids}`, adults:`${participants.adults}`}
+    const data = {...rest, ...participants}
     const createdBooking = await prisma.tourBooking.create({data})
     
       // console.log({createdBooking})

@@ -16,7 +16,7 @@ lat:-4.2968,lng:39.5825
 
 export const GA_TRACKING_ID:string = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID||'';
 
-export const SU=process.env.SU
+export const SU=process.env.NEXT_PUBLIC_SU
 
 export const ourServices = [
     'Services',
@@ -45,6 +45,10 @@ export interface IAttractionSite {
     longitude: number|null;
   }
 }
+
+export const API:string|undefined=process.env.NODE_ENV =='production'?process.env.NEXT_PUBLIC_PROD_API:process.env.NEXT_PUBLIC_DEV_API;
+// export const API=process.env.NODE_ENV =='production'?process.env.NEXT_PUBLIC_PROD_API:process.env.NEXT_PUBLIC_DEV_API;
+// console.log(API)
 
 export const touristAttractionSites: IAttractionSite[] = [
   {
