@@ -21,9 +21,10 @@ export default async function handler(
   res: NextApiResponse<Data | IGuest[]>
 ) {
   const { body } = req;
-  const {participants, ...others} = JSON.parse(body);
+  const { participants, ...others } = JSON.parse(body);
   const data = {
-    ...others, ...participants
+    ...others,
+    ...participants,
   };
 
   let result: { error: any; data: any; email: any; emailError: any } = {
@@ -34,12 +35,11 @@ export default async function handler(
   };
 
   if (req.method?.toLocaleLowerCase() === "post") {
-    
     try {
       const createdTour = await prisma.tourBooking.create({
         data,
       });
-      
+
       result = { ...result, data: createdTour };
       try {
         mailSender(
@@ -57,18 +57,17 @@ export default async function handler(
         )
           .then((res) => res.json())
           .then((data2) => {
-            result = {...result, email:data2}
+            result = { ...result, email: data2 };
           });
       } catch (error) {
-        console.log(error)
-        console.log(error)
-        result = {...result, emailError:error}
+        console.log(error);
+        console.log(error);
+        result = { ...result, emailError: error };
       }
 
       res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({ msg: "An error", resul:{...result, error} });
-
+      res.status(500).json({ msg: "An error", resul: { ...result, error } });
     }
   } else {
     const tours = await prisma.tourBooking.findMany();

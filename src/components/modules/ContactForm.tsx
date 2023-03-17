@@ -58,7 +58,7 @@ const onSubmit = async (values: FormValues) => {
 }
 
 const ActualForm = (props: FormikProps<FormValues>) => (
-    <Form {...props}>
+    <Form >
         <div>
         {FORM_FIELDS.map(
             ({ label, idAndName, type, placeholder = '' }: IFormField, indx) => (

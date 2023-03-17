@@ -19,6 +19,7 @@ model User {
   TourBooking TourBooking[]
   Employee    Employee?
   Payment     Payment[]
+  ConactMail  ConactMail[]
 }
 
 model Employee {
@@ -72,4 +73,17 @@ model Payment {
   tourBookingId String?
   userId        String
   mode          String?      @default("cash")
+}
+
+model ConactMail {
+  id         String    @id @default(uuid())
+  email      String
+  subject    String
+  message    String
+  to         String
+  name       String
+  createdAt  DateTime? @default(now())
+  repondedAt DateTime? @default(now())
+  responder  User?     @relation(fields: [userId], references: [id])
+  userId     String?
 }
