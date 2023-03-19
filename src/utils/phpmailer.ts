@@ -1,4 +1,4 @@
-import { EX_API } from "@/constants";
+
 
 
 const mailSender = (
@@ -7,7 +7,7 @@ const mailSender = (
   subject: string,
   body: string
 ) =>
-  fetch(`${EX_API}mailer`, {
+  fetch(`${process.env.NEXT_PUBLIC_EXT_API}mailer`, {
     method: "POST",
     body: JSON.stringify({
       to,

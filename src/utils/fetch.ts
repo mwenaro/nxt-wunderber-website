@@ -29,21 +29,21 @@ export const postFormData = async (
   path: string,
   postData: any,
   method: string = "POST"
-) => fetch(`${API}${path}`, {method,body: JSON.stringify(postData)});
+) => fetch(`/api/${path}`, {method,body: JSON.stringify(postData)});
 
 export const putData= async (
   path: string,
   postData: any,
   method: string = "PUT"
-) => fetch(`${API}${path}`, {method,body: JSON.stringify(postData)});
+) => fetch(`/api/${path}`, {method,body: JSON.stringify(postData)});
 
 export const deleteData= async (
   path: string,
     method: string = "DELETE"
-) => fetch(`${API}${path}`, {method});
+) => fetch(`/api/${path}`, {method});
 
 
 export const getData = async (
-  path: string) => fetch(`${API}${path}`);
+  path: string) => fetch(`/api/${path}`);
  
 

@@ -1,4 +1,3 @@
-import { EMAIL_HOST, EMAIL_PWD, EMAIL_USER } from "@/types";
 
 const nodemailer = require('nodemailer');
 
@@ -8,7 +7,7 @@ let info1;
   try {
     // Create a nodemailer transport object
     const transporter = nodemailer.createTransport({
-      host: EMAIL_HOST, // Enter your SMTP server host name
+      host: process.env.NEXT_PUBLIC_EMAIL_HOST, // Enter your SMTP server host name
       port: 465, // Enter the SMTP port number
       secure: false, // Set to true if you're using SSL/TLS
       auth: {
