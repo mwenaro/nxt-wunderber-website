@@ -13,7 +13,7 @@ interface Props {
 
 const MyCarousel: React.FC<Props> = ({ images }) => {
   return (
-    <div className='w-full relative overflow-hidden object-contain h-[500px]'>
+    <div className='w-full relative overflow-hidden object-contain h-fit'>
     <Carousel
       showArrows={true}
       showThumbs={false}
