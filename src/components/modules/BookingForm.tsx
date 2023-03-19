@@ -75,11 +75,13 @@ const BookingForm: React.FC = () => {
   });
 
   const onSubmit = async (values: IBookingForm) => {
-    console.log(values)
+ 
     try {
       let res =  await postFormData('booking', values);
       let data = await res.json();
       console.log({data})
+      alert('Booking was successful, kindly check your email inbox for further directions')
+      location.reload()
     } catch (error) {
       console.log(error)
       alert('There was an error, please try again')

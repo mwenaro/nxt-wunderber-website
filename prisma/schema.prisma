@@ -77,9 +77,9 @@ model Payment {
 
 model ConactMail {
   id         String    @id @default(uuid())
-  email      String
+  from       String
   subject    String
-  message    String
+  body       String
   to         String
   name       String
   createdAt  DateTime? @default(now())

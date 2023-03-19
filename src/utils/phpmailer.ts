@@ -7,7 +7,7 @@ const mailSender = (
   subject: string,
   body: string
 ) =>
-  fetch(`${EX_API}email`, {
+  fetch(`${EX_API}mailer`, {
     method: "POST",
     body: JSON.stringify({
       to,

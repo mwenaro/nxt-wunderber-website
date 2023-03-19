@@ -12,14 +12,14 @@ interface FormValues {
     email: string;
     fullName : string
     subject : string
-    message:string
+    body:string
 }
 
 const initialValues= {
     email: '',
     fullName : '',
     subject : '',
-    message:'',
+    body:'',
 }
 
 
@@ -27,7 +27,7 @@ const FORM_FIELDS: IFormField[] = [
     { label: "", type: "text", placeholder: "Full Name", idAndName: "fullName" },
     { label: "", type: "email", placeholder: "Enter Email", idAndName: "email" },
     { label: "", type: "text", placeholder: "Subject", idAndName: "subject" },
-    { label: "Message", type: "textarea", placeholder: "Message  ... ", idAndName: "message" },
+    { label: "Message", type: "textarea", placeholder: "Message  ... ", idAndName: "body" },
 
 ];
 
@@ -41,7 +41,7 @@ const SignupSchema = Yup.object().shape({
         .required('Plese Enter your Email'),
     subject: Yup.string()
         .required('Subject is Required'),
-    message: Yup.string()
+    body: Yup.string()
         .required('Message is Required'),
 });
 
@@ -51,6 +51,8 @@ const onSubmit = async (values: FormValues) => {
       let res =  await postFormData('contact', values);
       let data = await res.json();
       console.log({data})
+      alert("Thank you for contacting us, we'll get back to within 24hrs")
+      location.reload()
     } catch (error) {
       console.log(error)
       alert('There was an error, please try again')
@@ -86,9 +88,7 @@ export default function ContactForm() {
             <Formik
                 initialValues={initialValues}
                 validationSchema={SignupSchema}
-                onSubmit={values => {
-                    console.log(values);
-                }}
+                onSubmit={onSubmit}
                 component={ActualForm}
             />
         </div>
