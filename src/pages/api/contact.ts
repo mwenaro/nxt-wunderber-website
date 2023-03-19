@@ -40,7 +40,8 @@ export default async function handler(
     } catch (error:any) {
       result = { ...result,error: error.message };
     }
-    
+    res.json(result);
+    return;
     try {
       let resp = await mailSender(
         data.email,

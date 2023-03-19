@@ -77,11 +77,10 @@ model Payment {
 
 model ConactMail {
   id         String    @id @default(uuid())
-  from       String
+  email      String
   subject    String
   body       String
-  to         String
-  name       String
+  fullName   String
   createdAt  DateTime? @default(now())
   repondedAt DateTime? @default(now())
   responder  User?     @relation(fields: [userId], references: [id])

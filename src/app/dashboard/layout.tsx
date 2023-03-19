@@ -2,7 +2,7 @@
 import {useState} from 'react'
 import { DASHBOARD_LINKS } from "@/constants/dashboard";
 import Link from "next/link";
-import { FaAtom, FaDev, FaHome, FaPeopleArrows, FaPeopleCarry, FaShoppingBag, FaUser } from "react-icons/fa";
+import { FaAtom, FaDev, FaEnvelope, FaHome, FaPeopleArrows, FaPeopleCarry, FaShoppingBag, FaUser } from "react-icons/fa";
 
 
 type IProps = {
@@ -19,6 +19,7 @@ const IconObject = {
   employees: <FaPeopleArrows />,
   orders: <FaShoppingBag />,
   settings: <FaAtom />,
+  emails: <FaEnvelope />,
 
 
 };

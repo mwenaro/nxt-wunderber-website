@@ -52,7 +52,7 @@ const onSubmit = async (values: FormValues) => {
       let data = await res.json();
       console.log({data})
       alert("Thank you for contacting us, we'll get back to within 24hrs")
-      location.reload()
+    //   location.reload()
     } catch (error) {
       console.log(error)
       alert('There was an error, please try again')
