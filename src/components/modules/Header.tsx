@@ -8,8 +8,8 @@ import Navbar from './Navbar';
 export default function Header() {
   const [navToggle, setNavToggle] = useState<boolean>(false);
   return (
-    <header className="w-full pt-10  sm:pt-0 fixed top-0 right-0">
-      <div className='h-[50px] sm:hidden  relative'>
+    <header className="w-full pt-10  sm:pt-0 ">
+      <div className='h-[10px] sm:hidden  relative'>
         {/* <div></div> */}
       <button
         onClick={() => setNavToggle(!navToggle)}
