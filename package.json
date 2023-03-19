@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server.js",
     "devapp": "next dev",
-    "build": "next build & migrate",
+    "build": "next build",
     "migrate": "npx prisma migrate deploy",
     "start": "NODE_ENV=production node server.js",
     "lint": "next lint"

@@ -3,7 +3,7 @@ import { prisma } from "@/lib";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const getOrder = async (id: string) =>
-  await prisma.tourBooking.findMany({
+  await prisma.tourBooking.findUnique({
     where: {
       id,
     },

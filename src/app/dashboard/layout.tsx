@@ -33,7 +33,8 @@ return(
 
   // <PageWrapper>
 
-  <div className="grid grid-cols-5 sm:grid-cols-7 relative p-3 sm:p-5 ">
+  <div className="flex flex-col md:flex-row gap-0 relative p-3 sm:p-5 ">
+  {/* <div className="grid grid-cols-5 sm:grid-cols-7 relative p-3 sm:p-5 "> */}
     {< span className="sm:hidden"></span>}
     {/* sidebar */}
     <aside className="min-w-[100px] max-w-[200px] col-span-1 sm:col-span-2 justify-center items-center  bg-purple-500 text-white rounded-tl-3xl  min-h-fit h-screen">
@@ -61,7 +62,7 @@ return(
       </div>
     </aside>
     {/* Dasboardsub routes*/}
-    <div className="col-span-4 sm:col-span-5   ">
+    <div className="flex-1 p-5">
       {/* <div className=" flex-grow bg-gray-400"> */}
 
       {children}
