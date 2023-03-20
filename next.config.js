@@ -2,8 +2,8 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    topLevelAwait: true
+    topLevelAwait: true,
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
