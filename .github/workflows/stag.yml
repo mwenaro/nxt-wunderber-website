@@ -1,11 +1,12 @@
 name: Deploy to cPanel
 on:
   push:
-    branches: [stagging]
+    branches: [stag]
 
 jobs:
   web-deploy:
-     runs-on: ubuntu-latest
+    name: 🎉 Deploy1
+    runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
@@ -32,7 +33,7 @@ jobs:
             **/.git*/**
             **/node_modules/**
             *lock.json
-          server-dir: ./stagging.wunderber.com/
+          server-dir: ./stag.wunderber.com/
           # dangerous-clean-slate: true
 
       - name: SSH and Deploy
@@ -44,11 +45,12 @@ jobs:
             port: ${{ secrets.SSH_PORT }}
             script: |
               pwd
-              source /home/mwerothe/nodevenv/stagging.wunderber.com/16/bin/activate && cd /home/mwerothe/stagging.wunderber.com
+              source /home/mwerothe/nodevenv/stag.wunderber.com/16/bin/activate && cd /home/mwerothe/stag.wunderber.com
               pwd
               npm i
               npm run build
-              
+              npm i -g pm2
+              pm2 restart server.js
               
               # git pull origin main
               # npm install
