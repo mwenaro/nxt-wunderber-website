@@ -62,6 +62,7 @@ jobs:
           script: |
             pwd
             source /home/mwerothe/nodevenv/stagging.wunderber.com/18/bin/activate && cd /home/mwerothe/stagging.wunderber.com
+            
             pwd
             npm i
             npm run build
