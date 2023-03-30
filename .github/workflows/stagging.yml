@@ -20,6 +20,8 @@ jobs:
         run: |
           npm install
           npm run build
+        env:
+          DATABASE_URL: ${{secrets.DB_URL}}
 
       - name: 📂 Sync Uploading files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
