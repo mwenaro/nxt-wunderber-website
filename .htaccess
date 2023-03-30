@@ -1,7 +1,7 @@
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home/mwerothe/stag.wunderber.com"
+PassengerAppRoot "/home/mwerothe/stagging.wunderber.com"
 PassengerBaseURI "/"
-PassengerNodejs "/home/mwerothe/nodevenv/stag.wunderber.com/16/bin/node"
+PassengerNodejs "/home/mwerothe/nodevenv/stagging.wunderber.com/18/bin/node"
 PassengerAppType node
 PassengerStartupFile server.js
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
