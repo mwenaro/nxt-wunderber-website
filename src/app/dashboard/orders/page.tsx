@@ -31,9 +31,10 @@ const titiles = <div className="p-2 grid grid-cols-12 gap-1 border-1 border-red-
 </div>
 
 export default async function Orders() {
-  const orders = await prisma.tourBooking.findMany();
+  const orders:any = [];
+  //await prisma.tourBooking.findMany();
 
-  if (!orders) {
+  if (orders.length <=0) {
     return <div>No orders found!</div>
   }
   return (
@@ -42,11 +43,11 @@ export default async function Orders() {
       <div>
         {titiles}
         {
-
+/*
           orders.map((order) => <div key={order.id}>
             <OrderItem  {...order} />
           </div>)
-        }
+       */ }
       </div>
     </div>
   )

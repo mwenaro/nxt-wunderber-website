@@ -1,6 +1,9 @@
 import { prisma } from "@/lib";
 
-const getEmails = async () => await prisma.conactMail.findMany();
+//const getEmails = async () => await prisma.conactMail.findMany();
+const getEmails = async ()=>[];
+
+
 
 
 

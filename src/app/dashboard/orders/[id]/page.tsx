@@ -17,12 +17,14 @@ interface IProps {
 //     const order = await res.json()
 //     return order;
 // }
-const getOrder = async (id: string) =>
+const getOrder = async (id: string) =>{fullName:"no name"}
+/*
     await prisma.tourBooking.findUnique({
         where: {
             id,
         },
     });
+*/
 
 export default async function Order({ params }: IProps) {
     // const router = useRouter();
@@ -36,7 +38,7 @@ export default async function Order({ params }: IProps) {
         <div className=" flex gap-5"><Link href={`/dashboard/orders`} className=" hover:bg-skin-primary hover:text-2xl"> <span>Go Back</span> </Link>
             <h3>Order Item</h3>
         </div>
-        <div>{order && order.fullName}</div>
+        <div>hello no</div>
     </div>
 
 }
