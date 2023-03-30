@@ -35,7 +35,7 @@ jobs:
             **/.git*/**
             **/node_modules/**
             *lock.json
-          server-dir: ./staggingg.wunderber.com/
+          server-dir: ./stagging.wunderber.com/
           # dangerous-clean-slate: true
 
       - name: Install PM2
