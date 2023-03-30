@@ -1,9 +1,11 @@
 
-import { mongoDB } from "@/lib";
+import  {mongoDB} from "@/lib/mongoose";
 import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 
-mongoDB();
+/*mongoDB().then(()=>console.log("connection established !")).catch(error=>console.log('error has occurred '+ error.message));
+*/
+
 // Define a schema for your data
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -22,9 +24,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
+  await mongoDB();
    let created = await Watu.create({
     name:"Mwero",
-    email:"mwero@mail.com",
+    email:`mwero${Math.random()*1000}@mail.com`,
     password:"pwduser"
    }) ;
    console.log(created) ;
