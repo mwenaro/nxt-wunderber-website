@@ -1,4 +1,5 @@
 
+import type { NextApiRequest, NextApiResponse } from "next";
 import  {mongoDB} from "@/lib/mongoose";
 import {Watu} from "@/models";
 
@@ -9,6 +10,7 @@ export default async function handler(
   await mongoDB();
    await Watu.create({
     name:"Mwero",
+
     email:`mwero${Math.random()*1000}@mail.com`,
     password:"pwduser"
    }) ;
