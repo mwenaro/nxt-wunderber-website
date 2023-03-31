@@ -35,17 +35,9 @@ jobs:
             **/.git*/**
             **/node_modules/**
             *lock.json
-          server-dir: ./stagging.wunderber.com/
+          server-dir: ./stag.wunderber.com/
           # dangerous-clean-slate: true
 
-      - name: Install PM2
-        run: npm i -g pm2
-
-      - name: Start app using PM2
-        run: pm2 start server.js
-
-      - name: Save PM2 process list
-        run: pm2 save
 
       - name: Set up SSH connection to server
         uses: webfactory/ssh-agent@v0.5.0
@@ -61,10 +53,8 @@ jobs:
           port: ${{secrets.SSH_PORT}}
           script: |
             pwd
-            source /home/mwerothe/nodevenv/stagging.wunderber.com/18/bin/activate && cd /home/mwerothe/stagging.wunderber.com
+            source /home/mwerothe/nodevenv/stag.wunderber.com/16/bin/activate && cd /home/mwerothe/stag.wunderber.com
             
-            pwd
             npm i
             npm run build
-            npm i -g pm2
-            pm2 restart server.js
+            cloudlinux-selector restart  --json --interpreter nodejs --app-root /home/mwerothe/stag.wunderber.com

@@ -7,7 +7,7 @@ const mailSender = (
   subject: string,
   body: string
 ) =>
-  fetch(`${process.env.NEXT_PUBLIC_EXT_API}mailer`, {
+  fetch(`${process.env.EX_MWEROS_APIS}mailer`, {
     method: "POST",
     body: JSON.stringify({
       to,
