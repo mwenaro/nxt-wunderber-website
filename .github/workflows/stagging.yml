@@ -52,9 +52,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{secrets.SSH_PORT}}
           script: |
-            pwd
             source /home/mwerothe/nodevenv/stag.wunderber.com/16/bin/activate && cd /home/mwerothe/stag.wunderber.com
             
             npm i
             npm run build
+            cd /
             cloudlinux-selector restart  --json --interpreter nodejs --app-root /home/mwerothe/stag.wunderber.com
