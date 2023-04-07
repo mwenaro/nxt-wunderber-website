@@ -3,7 +3,23 @@ const MONGO_DB_URI= `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MO
 
 
 export const mongoDB = async () => {
-  return mongoose.connect(MONGO_DB_URI);
+  let conn:any = null; 
+  try {
+    mongoose.connect(MONGO_DB_URI);
+ 
+    conn = true;
+    
+  } catch (error) {
+    conn = error;
+
+  }finally{
+    console.log({conn})
+    return conn;
+  }
+  
+  
+  
+  
   /*,{
     /*useNewUrlParser: true,
     
