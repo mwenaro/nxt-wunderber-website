@@ -23,7 +23,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  let result: any[] = [];
+  let result: any[] = [201];
   try {
     let conn = await mongoDB();
 
