@@ -27,13 +27,14 @@ export default async function handler(
   try {
     let conn = await mongoDB();
 
-    let created = await Watu.create({
-      name: "Mwero",
-      email: `mwero${Math.random() * 1000}@mail.com`,
-      password: "pwduser",
-    });
+    // let created = await Watu.create({
+    //   name: "Mwero",
+    //   email: `mwero${Math.random() * 1000}@mail.com`,
+    //   password: "pwduser",
+    // });
 
-    result.push({ created, conn });
+    result.push({ conn });
+    // result.push({  conn });
   } catch (err:any) {
     result.push({err:err.message});
   } finally {
