@@ -13,7 +13,14 @@ const userSchema = new mongoose.Schema({
 });
 
 // Create a model based on the schema
-const Watu = mongoose.model("Watu", userSchema);
+let Watu:any;
+if (mongoose.modelNames().includes('Watu')) {
+  Watu = mongoose.model('Watu');
+} else {
+  Watu = mongoose.model('Watu', userSchema);
+}
+
+
 
 // export default User;
 
@@ -27,9 +34,9 @@ export default async function handler(
   try {
     let conn = await mongoDB();
 
-    
+    let created = Watu.find()
 
-    result.push({ conn });
+    result.push({ conn, created });
    
   } catch (err:any) {
     result.push({err:err.message});
