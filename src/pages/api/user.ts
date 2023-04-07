@@ -35,7 +35,7 @@ export default async function handler(
 
     result.push({ created, conn });
   } catch (err) {
-    result.push(err);
+    result.push({err});
   } finally {
     res.status(200).json(result);
   }
