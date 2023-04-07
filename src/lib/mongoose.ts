@@ -6,12 +6,12 @@ const MONGO_DB_URI= `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MO
 export const mongoDB = async () => {
   let conn:any = null; 
   try {
-    mongoose.connect(MONGO_DB_URI);
+  await  mongoose.connect(MONGO_DB_URI);
  
     conn = true;
     
-  } catch (error) {
-    conn = error;
+  } catch (error:any) {
+    conn = {errr:error.message};
 
   }finally{
     console.log({conn})
