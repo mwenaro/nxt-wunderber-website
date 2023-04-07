@@ -34,8 +34,8 @@ export default async function handler(
     });
 
     result.push({ created, conn });
-  } catch (err) {
-    result.push({err});
+  } catch (err:any) {
+    result.push({err:err.message});
   } finally {
     res.status(200).json(result);
   }
