@@ -24,10 +24,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  let conn = await mongoDB();
-  res.status(200).send(conn)
+  await mongoDB();
+  
 
-  //  let created = await Watu.create({name:"Mwero",email:`mwero${Math.random()*1000}@mail.com`,password:"pwduser"}) ;
-  //  console.log(created) ;
-  //  res.status(200).json({created})  ;
+   let created = await Watu.create({name:"Mwero",email:`mwero${Math.random()*1000}@mail.com`,password:"pwduser"}) ;
+   console.log(created) ;
+   res.status(200).json({created})  ;
 }
