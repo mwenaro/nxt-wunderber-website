@@ -25,11 +25,13 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
   await mongoDB();
-   let created = await Watu.create({
-    name:"Mwero",
-    email:`mwero${Math.random()*1000}@mail.com`,
-    password:"pwduser"
-   }) ;
+   let created = await Watu.find();
+  //  create({
+  //   name:"Mwero",
+  //   email:`mwero${Math.random()*1000}@mail.com`,
+  //   password:"pwduser"
+  //  }) ;
+   
    console.log(created) ;
    res.status(200).json({created})  ;
 }
