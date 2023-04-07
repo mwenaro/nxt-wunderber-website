@@ -14,7 +14,7 @@ export const mongoDB = async () => {
     conn = {errr:error.message};
 
   }finally{
-    console.log({conn})
+    // console.log({conn})
     return conn;
   }
   
