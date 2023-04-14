@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 // import { FaStar } from "react-icons/fa";
 import { Formik, Form } from "formik";
@@ -10,24 +10,29 @@ import { postFormData } from "@/utils/fetch";
 import { API } from "@/constants";
 import { Button } from "./buttons";
 
-
-
-
 const SAFARI_TYPES = [
   { label: "--Select Safari Type--", value: "" },
   { label: "Custom Trip Package", value: "Custom Trip Package" },
   { label: "Pre-Packaged Group Tour", value: "Pre-Packaged Group Tour" },
-  { label: "Travel Specialist Suggestions", value: "Travel Specialist Suggestions" },
+  {
+    label: "Travel Specialist Suggestions",
+    value: "Travel Specialist Suggestions",
+  },
 ];
 
 const SAFARI_DURATIONS = [
-  { label: "--Select Safari Duration--", value: "" },
+  { label: "-- Tour Duration--", value: "" },
+  { label: "Half a Day", value: "Half a Day" },
+  { label: "1 Day", value: "1 Day" },
+  { label: "2 Days", value: "2 Days" },
+  { label: "3 Days", value: "3 Days" },
+  { label: "4 Days", value: "4 Days" },
   { label: "5 Days", value: "5 Days" },
   { label: "6 Days", value: "6 Days" },
-  { label: "7 Days", value: "7 Days" },
-  { label: "8 Days", value: "8 Days" },
-  { label: "9 Days", value: "9 Days" },
-  { label: "10 Days", value: "10 Days" },
+  { label: "1 Week ", value: "1 Week " },
+  { label: "2 Weeks ", value: "2 Weeks " },
+  { label: "3 Weeks ", value: "3 Weeks " },
+  { label: "4 Weeks ", value: "4 Weeks " }
 ];
 
 const ACCOMMODATION_LEVELS = [
@@ -61,41 +66,47 @@ const BookingForm: React.FC = () => {
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
-    email: Yup.string().email("Invalid email address").required("Email is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
     phone: Yup.string().required("Phone number is required"),
     country: Yup.string().required("Country is required"),
     departureDate: Yup.date().required("Departure date is required"),
     // safariType: Yup.string().required("Safari type is required"),
-    // safariDuration: Yup.string().required("Safari duration is required"),
+    safariDuration: Yup.string().required("Safari duration is required"),
     // // participants:Yup.object().optional(),
     specialInterests: Yup.string(),
 
     // participants.kids: Yup.string().required("Safari duration is required"),
-
   });
 
   const onSubmit = async (values: IBookingForm) => {
- 
     try {
-      let res =  await postFormData('booking', values);
+      let res = await postFormData("booking", values);
       let data = await res.json();
-      console.log({data})
-      alert('Booking was successful, kindly check your email inbox for further directions')
+      console.log({ data });
+      alert(
+        "Booking was successful, kindly check your email inbox for further directions"
+      );
       // location.reload()
     } catch (error) {
-      console.log(error)
-      alert('There was an error, please try again')
+      console.log(error);
+      alert("There was an error, please try again");
     }
-  
-    
   };
 
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
       {(props) => (
-        <Form  >
+        <Form>
           <div className="flex flex-col  mx-auto max-w-md justify-center py-2 sm:py-5">
-            <h3 className="text-center font-bold text-2xl">Fill the form to book  </h3>
+            <h3 className="text-center font-bold text-2xl">
+              Fill the form to book{" "}
+            </h3>
             <InputField
               idAndName="fullName"
               type="text"
@@ -120,21 +131,25 @@ const BookingForm: React.FC = () => {
             <InputField
               idAndName="country"
               type="select"
-            // label="Country"
-
+              // label="Country"
             >
-              <option value={''}> --- Country --- </option>
+              <option value={""}> --- Country --- </option>
               <CountryOptions />
             </InputField>
-
 
             <InputField
               idAndName="departureDate"
               type="date"
               label="Departure Date"
-
             />
 
+<InputField
+              idAndName="safariDuration"
+              type="select"
+              // label="Safari Duration"
+              options={SAFARI_DURATIONS}
+            />
+            
             <div className="flex flex-col w-full px-3">
               <label className="p4">Number of People:</label>
               <div className="grid grid-cols-2 gap-3 pl-5">
@@ -143,9 +158,8 @@ const BookingForm: React.FC = () => {
                   styles="col-span-1"
                   type="number"
                   min={1}
-                  required='required'
+                  required="required"
                   label="Adults"
-
                 />
                 <InputField
                   idAndName="participants.kids"
@@ -153,34 +167,20 @@ const BookingForm: React.FC = () => {
                   type="number"
                   min={0}
                   label="Kids"
-
                 />
               </div>
-
             </div>
 
-
-
-            {/* <InputField
-              idAndName="safariDuration"
-              type="select"
-              // label="Safari Duration"
-              options={SAFARI_DURATIONS}
-            /> */}
 
             <InputField
               idAndName="specialInterests"
               type="textarea"
               placeholder="Special Ineterets"
-
             />
 
-
-
-
-            <Button type="submit" styles="my-5">Submit</Button>
-           
-
+            <Button type="submit" styles="my-5">
+              Submit
+            </Button>
           </div>
         </Form>
       )}
