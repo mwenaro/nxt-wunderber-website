@@ -2,8 +2,8 @@
 const nodemailer = require('nodemailer');
 // dotenv.config();
 const sendConfirmationEmail = async (
-  email:string='mweroabdalla@gmail.com', 
-  name:string='Mwero Abdalla', 
+  email:string='mashudimwayama@gmail.com', 
+  name:string='Mashudi', 
   amount:number=1200) => {
 let result:any={error:"",flag:false}
 let info1;
@@ -27,8 +27,10 @@ let info1;
     const message = {
       from: process.env.NEXT_PUBLIC_EMAIL_USER, // Use your domain email address as the sender
       to: email,
-      subject: 'Confirmation of Booking',
-      text: `Dear ${name},\n\nThank you for booking with us. We have received your payment of $${amount} and your booking is confirmed.\n\nWe look forward to seeing you on your tour!\n\nBest regards,\nThe Tour Company`
+      subject: 'Booking Confirmation',
+      text: `Dear ${name},\n
+      Thank you for making reservation with us. Your booking has been received and confirmed.  
+      Our representative will get back to you as soon as possible.\n\nBest regards,\n Wunderber Kenia Adventures.`
     };
 
     // Send the email

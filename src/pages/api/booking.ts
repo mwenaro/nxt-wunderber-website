@@ -35,6 +35,7 @@ export default async function handler(
   };
 
   if (req.method?.toLocaleLowerCase() === "post") {
+    const name = data.fullName.trim().split(' ').pop();
   
 
     try {
@@ -42,14 +43,9 @@ export default async function handler(
         body.email,
         EMAIL_USER || "",
         "Booking Confirmation",
-        `Dear ${data.fullName}, \n
-           This is to confirm that you have booked for tour with is which 
-           is due on ${data.departureDate}. We are currently processing it. \n
-           Feel free to reach us should you have any questions.\n\n
-           
-           Regards,\n
-           \t Wunderber Kenia Adventures.
-           `
+        `Dear ${name},
+        Thank you for making reservation with us. Your booking has been received and confirmed.  
+        Our representative will get back to you as soon as possible.\n\nBest regards,\n Wunderber Kenia Adventures.`
       );
       
       let d = await resp.json();
