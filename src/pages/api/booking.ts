@@ -1,11 +1,11 @@
-import { Database } from "../../utils/db";
+// import { Database } from "../../utils/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { EMAIL_USER, IGuest } from "@/types";
 import { sendConfirmationEmail } from "@/lib/nodemailer";
-import { prisma } from "@/lib";
+// import { prisma } from "@/lib";
 import mailSender from "@/utils/phpmailer";
 
-const guestDb = Database();
+// const guestDb = Database();
 type Data =
   | {
       name: string;
@@ -35,14 +35,7 @@ export default async function handler(
   };
 
   if (req.method?.toLocaleLowerCase() === "post") {
-    try {
-      const createdTour = await prisma.tourBooking.create({
-        data,
-      });
-      result = { ...result, data: createdTour };
-    } catch (error:any) {
-      result = { ...result,error: error.message };
-    }
+  
 
     try {
       let resp = await mailSender(
@@ -64,6 +57,7 @@ export default async function handler(
     } catch (error:any) {
       
       result = { ...result, emailError: error.message };
+      res.status(500).json(result);
     } finally {
       res.status(200).json(result);
       return;

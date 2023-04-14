@@ -81,7 +81,7 @@ const BookingForm: React.FC = () => {
       let data = await res.json();
       console.log({data})
       alert('Booking was successful, kindly check your email inbox for further directions')
-      location.reload()
+      // location.reload()
     } catch (error) {
       console.log(error)
       alert('There was an error, please try again')
@@ -95,7 +95,7 @@ const BookingForm: React.FC = () => {
       {(props) => (
         <Form  >
           <div className="flex flex-col  mx-auto max-w-md justify-center py-2 sm:py-5">
-            <h3 className="text-center font-bold text-2xl">Fill the form to book </h3>
+            <h3 className="text-center font-bold text-2xl">Fill the form to book  </h3>
             <InputField
               idAndName="fullName"
               type="text"

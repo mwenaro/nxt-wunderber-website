@@ -1,11 +1,11 @@
-
+import { Database } from "../../utils/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { EMAIL_USER, IGuest } from "@/types";
-
-// import { prisma } from "@/lib";
+import { sendConfirmationEmail } from "@/lib/nodemailer";
+import { prisma } from "@/lib";
 import mailSender from "@/utils/phpmailer";
 
-
+const guestDb = Database();
 type Data =
   | {
       name: string;
@@ -21,8 +21,12 @@ export default async function handler(
   res: NextApiResponse<Data | IGuest[]>
 ) {
   const { body } = req;
-  const data= JSON.parse(body);
-  
+  const { participants, ...others } = JSON.parse(body);
+  const data = {
+    ...others,
+    ...participants,
+  };
+
   let result: { error: any; data: any; email: any; emailError: any } = {
     error: "",
     data: "",
@@ -31,25 +35,24 @@ export default async function handler(
   };
 
   if (req.method?.toLocaleLowerCase() === "post") {
-    // try {
-    //   const createdTour = await prisma.conactMail.create({
-    //     data
-    //   });
-    //   result = { ...result, data: createdTour };
-      
-    // } catch (error:any) {
-    //   result = { ...result,error: error.message };
-    // }
-    // res.json(result);
-    // return;
+    try {
+      const createdTour = await prisma.tourBooking.create({
+        data,
+      });
+      result = { ...result, data: createdTour };
+    } catch (error:any) {
+      result = { ...result,error: error.message };
+    }
+
     try {
       let resp = await mailSender(
-        data.email,
+        body.email,
         EMAIL_USER || "",
-        data.subject,
+        "Booking Confirmation",
         `Dear ${data.fullName}, \n
-           This is to confirm that we have received your email, and we're working on it. We'll get back to you within 24 hours.   
-            \nFeel free to reach us should you have any questions.\n\n
+           This is to confirm that you have booked for tour with is which 
+           is due on ${data.departureDate}. We are currently processing it. \n
+           Feel free to reach us should you have any questions.\n\n
            
            Regards,\n
            \t Wunderber Kenia Adventures.
@@ -61,7 +64,6 @@ export default async function handler(
     } catch (error:any) {
       
       result = { ...result, emailError: error.message };
-      res.status(500).json(result);
     } finally {
       res.status(200).json(result);
       return;

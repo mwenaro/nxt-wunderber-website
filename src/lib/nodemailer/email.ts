@@ -1,7 +1,10 @@
 
 const nodemailer = require('nodemailer');
-
-const sendConfirmationEmail = async (email:string='mweroabdalla@gmail.com', name:string='Mwero Abdalla', amount:number=1200) => {
+// dotenv.config();
+const sendConfirmationEmail = async (
+  email:string='mweroabdalla@gmail.com', 
+  name:string='Mwero Abdalla', 
+  amount:number=1200) => {
 let result:any={error:"",flag:false}
 let info1;
   try {
@@ -9,7 +12,7 @@ let info1;
     const transporter = nodemailer.createTransport({
       host: process.env.NEXT_PUBLIC_EMAIL_HOST, // Enter your SMTP server host name
       port: 465, // Enter the SMTP port number
-      secure: false, // Set to true if you're using SSL/TLS
+      secure: true, // Set to true if you're using SSL/TLS
       auth: {
         user: process.env.NEXT_PUBLIC_EMAIL_USER, // Enter your domain email address
         pass: process.env.NEXT_PUBLIC_EMAIL_PWD ,// Enter your domain email password
@@ -31,11 +34,11 @@ let info1;
     // Send the email
     const info=info1 = await transporter.sendMail(message);
     console.log(`Email sent to ${email}: ${info.response}`);
-    return {...result, flag:true}
+    return {...result, flag:true, info}
   } catch (error:any) {
 
     console.log(error.message);
-    return {...result, error:error.message, info1}
+    return {...result, error:error.message, info1,flag:false}
   }
 
 };
