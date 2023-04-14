@@ -51,7 +51,7 @@ const onSubmit = async (values: FormValues) => {
       let res =  await postFormData('contact', values);
       let data = await res.json();
       console.log({data})
-      alert("Thank you for contacting us, we'll get back to within 24hrs")
+      alert("Dear Valued Guest. Thank you for contacting us, check your email your for further directions.")
     //   location.reload()
     } catch (error) {
       console.log(error)
