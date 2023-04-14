@@ -43,17 +43,13 @@ export default async function handler(
     // res.json(result);
     // return;
     try {
+      const name = data.fullName.trim().split(' ').pop();
       let resp = await mailSender(
         data.email,
         EMAIL_USER || "",
         data.subject,
-        `Dear ${data.fullName}, \n
-           This is to confirm that we have received your email, and we're working on it. We'll get back to you within 24 hours.   
-            \nFeel free to reach us should you have any questions.\n\n
-           
-           Regards,\n
-           \t Wunderber Kenia Adventures.
-           `
+        `Dear ${name},
+        Thank you for making reservation with us. Your booking has been received and confirmed.  `
       );
       
       let d = await resp.json();

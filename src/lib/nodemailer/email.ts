@@ -2,9 +2,13 @@
 const nodemailer = require('nodemailer');
 // dotenv.config();
 const sendConfirmationEmail = async (
-  email:string='mashudimwayama@gmail.com', 
+  to:string='mashudimwayama@gmail.com', 
   name:string='Mashudi', 
-  amount:number=1200) => {
+  subject: string = "Booking Confirmation",
+  body:string = `Dear ${name},\n
+  Thank you for making reservation with us. Your booking has been received and confirmed.  
+  Our representative will get back to you as soon as possible.\n\nBest regards,\n Wunderber Kenia Adventures.`
+  ,amount:number=1200) => {
 let result:any={error:"",flag:false}
 let info1;
   try {
@@ -26,16 +30,15 @@ let info1;
     // Define the email message
     const message = {
       from: process.env.NEXT_PUBLIC_EMAIL_USER, // Use your domain email address as the sender
-      to: email,
-      subject: 'Booking Confirmation',
-      text: `Dear ${name},\n
-      Thank you for making reservation with us. Your booking has been received and confirmed.  
-      Our representative will get back to you as soon as possible.\n\nBest regards,\n Wunderber Kenia Adventures.`
+      to,
+      // bcc:process.env.NEXT_PUBLIC_EMAIL_USER,
+      subject,
+      text: body
     };
 
     // Send the email
     const info=info1 = await transporter.sendMail(message);
-    console.log(`Email sent to ${email}: ${info.response}`);
+    console.log(`Email sent to ${to}: ${info.response}`);
     return {...result, flag:true, info}
   } catch (error:any) {
 

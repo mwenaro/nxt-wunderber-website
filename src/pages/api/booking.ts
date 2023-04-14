@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { EMAIL_USER, IGuest } from "@/types";
 import { sendConfirmationEmail } from "@/lib/nodemailer";
 // import { prisma } from "@/lib";
-import mailSender from "@/utils/phpmailer";
+// import mailSender from "@/utils/phpmailer";
 
 // const guestDb = Database();
 type Data =
@@ -27,6 +27,7 @@ export default async function handler(
     ...participants,
   };
 
+  
   let result: { error: any; data: any; email: any; emailError: any } = {
     error: "",
     data: "",
@@ -34,21 +35,25 @@ export default async function handler(
     emailError: "",
   };
 
+
   if (req.method?.toLocaleLowerCase() === "post") {
     const name = data.fullName.trim().split(' ').pop();
+    
   
 
     try {
-      let resp = await mailSender(
-        body.email,
-        EMAIL_USER || "",
-        "Booking Confirmation",
-        `Dear ${name},
-        Thank you for making reservation with us. Your booking has been received and confirmed.  
-        Our representative will get back to you as soon as possible.\n\nBest regards,\n Wunderber Kenia Adventures.`
-      );
+      const resp1 = await sendConfirmationEmail(process.env.NEXT_PUBLIC_EMAIL_USER,"Admin", "Booking Notification",`You have a booking notification from ${name} which is due on ${data.departureDate}. \n Kindly check and respond ASAP!`)
+      const resp = await sendConfirmationEmail(data.email,name)
+      // let resp = await mailSender(
+      //   body.email,
+      //   EMAIL_USER || "",
+      //   "Booking Confirmation",
+      //   `Dear ${name},
+      //   Thank you for making reservation with us. Your booking has been received and confirmed.  
+      //   Our representative will get back to you as soon as possible.\n\nBest regards,\n Wunderber Kenia Adventures.`
+      // );
       
-      let d = await resp.json();
+      let d = resp;
       result = { ...result, email: d };
     } catch (error:any) {
       
