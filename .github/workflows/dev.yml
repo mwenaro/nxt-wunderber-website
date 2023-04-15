@@ -40,3 +40,21 @@ jobs:
           # dangerous-clean-slate: true
 
       
+      - name: Set up SSH connection to server
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy app using SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USER}}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{secrets.SSH_PORT}}
+          script: |
+            pwd
+            source /home/mwerothe/nodevenv/dev2.wunderber.com/16/bin/activate && cd /home/mwerothe/dev2.wunderber.com
+            npm i
+            npm run build
+            cloudlinux-selector restart  --json --interpreter nodejs --app-root /home/mwerothe/dev2.wunderber.com
