@@ -48,7 +48,8 @@ const ACCOMMODATION_LEVELS = [
 ];
 
 const BookingForm: React.FC = () => {
-const {  ToastContainer } = useToastify();
+  const { successToast, errorToast, ToastContainer } = useToastify();
+
 
   // consts
   const initialValues: IBookingForm = {
@@ -83,7 +84,6 @@ const {  ToastContainer } = useToastify();
   });
 
   const onSubmit = async (values: IBookingForm) => {
-const { successToast, errorToast, ToastContainer } = useToastify();
    
     try {
       let res = await postFormData("booking", values);

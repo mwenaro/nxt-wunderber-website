@@ -5,7 +5,7 @@ import { Formik, FormikProps, Form } from 'formik';
 import { IFormField, InputField } from './form';
 import { Button } from './buttons';
 import { postFormData } from '@/utils/fetch';
-import { useToastify } from './toast';
+import { ToastContainer, errorToast, successToast, useToastify } from './toast';
 
 
 
@@ -49,7 +49,6 @@ const SignupSchema = Yup.object().shape({
 
 const onSubmit = async (values: FormValues) => {
     // console.log(values)
-const { successToast, errorToast, ToastContainer } = useToastify();
 
     try {
       let res =  await postFormData('contact', values);
@@ -86,6 +85,8 @@ const ActualForm = (props: FormikProps<FormValues>) => (
 );
 
 export default function ContactForm() {
+// const { successToast, errorToast, ToastContainer } = useToastify();
+
     return (
         <div className='p- sm:p-5 flex flex-col'>
             <h3>Contact</h3>
@@ -95,6 +96,7 @@ export default function ContactForm() {
                 onSubmit={onSubmit}
                 component={ActualForm}
             />
+            <ToastContainer></ToastContainer>
         </div>
     )
 }
