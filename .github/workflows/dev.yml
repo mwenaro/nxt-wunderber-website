@@ -37,7 +37,7 @@ jobs:
            **/node_modules/**
            *lock.json
           server-dir: ./dev2.wunderber.com/
-          # dangerous-clean-slate: true
+          dangerous-clean-slate: true
   app-restart:
     needs: web-deploy
     name: 🎉 Resart app
