@@ -58,5 +58,7 @@ jobs:
           port: ${{secrets.SSH_PORT}}
           script: |
             pwd
-            source /home/mwerothe/nodevenv/dev2.wunderber.com/16/bin/activate && cd /home/mwerothe/dev2.wunderber.com
+            source /home/mwerothe/nodevenv/dev2.wunderber.com/16/bin/activate && cd /home/mwerothe/dev2.wunderber.com 
+            npm install && npm run build
+          
             cloudlinux-selector restart  --json --interpreter nodejs --app-root /home/mwerothe/dev2.wunderber.com
