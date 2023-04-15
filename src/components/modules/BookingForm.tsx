@@ -88,7 +88,7 @@ const BookingForm: React.FC = () => {
       alert(
         "Booking was successful, kindly check your email inbox for further directions"
       );
-      // location.reload()
+      location.reload()
     } catch (error) {
       console.log(error);
       alert("There was an error, please try again");

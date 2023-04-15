@@ -50,9 +50,9 @@ const onSubmit = async (values: FormValues) => {
     try {
       let res =  await postFormData('contact', values);
       let data = await res.json();
-      console.log({data})
+    //   console.log({data})
       alert("Dear Valued Guest. Thank you for contacting us, check your email your for further directions.")
-    //   location.reload()
+      location.reload()
     } catch (error) {
       console.log(error)
       alert('There was an error, please try again')
