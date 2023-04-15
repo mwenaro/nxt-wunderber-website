@@ -39,8 +39,8 @@ jobs:
           server-dir: ./dev2.wunderber.com/
           # dangerous-clean-slate: true
   app-restart:
-    needs: web-ploy
-    name: 🎉 Deploy1
+    needs: web-deploy
+    name: 🎉 Resart app
     runs-on: ubuntu-latest
     steps:
       
