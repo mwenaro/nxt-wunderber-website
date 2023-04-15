@@ -5,10 +5,11 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { IBookingForm } from "@/types";
 import CountryOptions from "./CountryOptions";
-import { InputField, InputFieldContainer } from "./form";
+import { InputField } from "./form";
 import { postFormData } from "@/utils/fetch";
-import { API } from "@/constants";
 import { Button } from "./buttons";
+import { useToastify } from "./toast";
+const { successToast, errorToast, ToastContainer } = useToastify();
 
 const SAFARI_TYPES = [
   { label: "--Select Safari Type--", value: "" },
@@ -32,7 +33,7 @@ const SAFARI_DURATIONS = [
   { label: "1 Week ", value: "1 Week " },
   { label: "2 Weeks ", value: "2 Weeks " },
   { label: "3 Weeks ", value: "3 Weeks " },
-  { label: "4 Weeks ", value: "4 Weeks " }
+  { label: "4 Weeks ", value: "4 Weeks " },
 ];
 
 const ACCOMMODATION_LEVELS = [
@@ -85,106 +86,113 @@ const BookingForm: React.FC = () => {
       let res = await postFormData("booking", values);
       let data = await res.json();
       console.log({ data });
-      alert(
+      // toast.success("Booking was successful, kindly check your email inbox for further directions",{
+      // });
+
+      // position: toast.POSITION.TOP_RIGHT
+      successToast(
         "Booking was successful, kindly check your email inbox for further directions"
       );
-      location.reload()
+
+      location.reload();
     } catch (error) {
       console.log(error);
-      alert("There was an error, please try again");
+      errorToast("There was an error, please try again");
     }
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {(props) => (
-        <Form>
-          <div className="flex flex-col  mx-auto max-w-md justify-center py-2 sm:py-5">
-            <h3 className="text-center font-bold text-2xl">
-              Fill the form to book{" "}
-            </h3>
-            <InputField
-              idAndName="fullName"
-              type="text"
-              placeholder="Full Name"
-              fieldStyles="form-input w-full"
-            />
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {(props) => (
+          <Form>
+            <div className="flex flex-col  mx-auto max-w-md justify-center py-2 sm:py-5">
+              <h3 className="text-center font-bold text-2xl">
+                Fill the form to book{" "}
+              </h3>
+              <InputField
+                idAndName="fullName"
+                type="text"
+                placeholder="Full Name"
+                fieldStyles="form-input w-full"
+              />
 
-            <InputField
-              idAndName="email"
-              type="email"
-              placeholder="Email Address"
-              fieldStyles="form-input w-full"
-            />
+              <InputField
+                idAndName="email"
+                type="email"
+                placeholder="Email Address"
+                fieldStyles="form-input w-full"
+              />
 
-            <InputField
-              idAndName="phone"
-              type="tel"
-              placeholder="Phone Number"
-              fieldStyles="form-input w-full"
-            />
+              <InputField
+                idAndName="phone"
+                type="tel"
+                placeholder="Phone Number"
+                fieldStyles="form-input w-full"
+              />
 
-            <InputField
-              idAndName="country"
-              type="select"
-              // label="Country"
-            >
-              <option value={""}> --- Country --- </option>
-              <CountryOptions />
-            </InputField>
+              <InputField
+                idAndName="country"
+                type="select"
+                // label="Country"
+              >
+                <option value={""}> --- Country --- </option>
+                <CountryOptions />
+              </InputField>
 
-            <InputField
-              idAndName="departureDate"
-              type="date"
-              label="Departure Date"
-            />
+              <InputField
+                idAndName="departureDate"
+                type="date"
+                label="Departure Date"
+              />
 
-<InputField
-              idAndName="safariDuration"
-              type="select"
-              // label="Safari Duration"
-              options={SAFARI_DURATIONS}
-            />
-            
-            <div className="flex flex-col w-full px-3">
-              <label className="p4">Number of People:</label>
-              <div className="grid grid-cols-2 gap-3 pl-5">
-                <InputField
-                  idAndName="participants.adults"
-                  styles="col-span-1"
-                  type="number"
-                  min={1}
-                  required="required"
-                  label="Adults"
-                />
-                <InputField
-                  idAndName="participants.kids"
-                  styles="col-span-1 "
-                  type="number"
-                  min={0}
-                  label="Kids"
-                />
+              <InputField
+                idAndName="safariDuration"
+                type="select"
+                // label="Safari Duration"
+                options={SAFARI_DURATIONS}
+              />
+
+              <div className="flex flex-col w-full px-3">
+                <label className="p4">Number of People:</label>
+                <div className="grid grid-cols-2 gap-3 pl-5">
+                  <InputField
+                    idAndName="participants.adults"
+                    styles="col-span-1"
+                    type="number"
+                    min={1}
+                    required="required"
+                    label="Adults"
+                  />
+                  <InputField
+                    idAndName="participants.kids"
+                    styles="col-span-1 "
+                    type="number"
+                    min={0}
+                    label="Kids"
+                  />
+                </div>
               </div>
+
+              <InputField
+                idAndName="specialInterests"
+                type="textarea"
+                placeholder="Special Ineterets"
+              />
+
+              <Button type="submit" styles="my-5">
+                Submit
+              </Button>
             </div>
-
-
-            <InputField
-              idAndName="specialInterests"
-              type="textarea"
-              placeholder="Special Ineterets"
-            />
-
-            <Button type="submit" styles="my-5">
-              Submit
-            </Button>
-          </div>
-        </Form>
-      )}
-    </Formik>
+          </Form>
+        )}
+      </Formik>
+      <ToastContainer></ToastContainer>
+    </>
   );
 };
 

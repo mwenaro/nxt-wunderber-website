@@ -5,6 +5,9 @@ import { Formik, FormikProps, Form } from 'formik';
 import { IFormField, InputField } from './form';
 import { Button } from './buttons';
 import { postFormData } from '@/utils/fetch';
+import { useToastify } from './toast';
+
+const { successToast, errorToast, ToastContainer } = useToastify();
 
 
 
@@ -51,11 +54,11 @@ const onSubmit = async (values: FormValues) => {
       let res =  await postFormData('contact', values);
       let data = await res.json();
     //   console.log({data})
-      alert("Dear Valued Guest. Thank you for contacting us, check your email your for further directions.")
+      successToast("Dear Valued Guest. Thank you for contacting us, check your email your for further directions.")
       location.reload()
     } catch (error) {
       console.log(error)
-      alert('There was an error, please try again')
+      errorToast('There was an error, please try again')
     }
 }
 
