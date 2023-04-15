@@ -24,7 +24,7 @@ jobs:
         env:
           DATABASE_URL: ${{secrets.DB_URL}}
         
-      - name: 📂 Sync FrontEnd files
+      - name: 📂 Sync  files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.ftp_server }}
