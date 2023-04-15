@@ -37,7 +37,7 @@ jobs:
            **/node_modules/**
            *lock.json
           server-dir: ./dev2.wunderber.com/
-          dangerous-clean-slate: true
+          # dangerous-clean-slate: true
   app-restart:
     needs: web-deploy
     name: 🎉 Resart app
@@ -58,7 +58,6 @@ jobs:
           port: ${{secrets.SSH_PORT}}
           script: |
             pwd
-            source /home/mwerothe/nodevenv/dev2.wunderber.com/16/bin/activate && cd /home/mwerothe/dev2.wunderber.com 
-            npm install && npm run build
-          
+            source /home/mwerothe/nodevenv/dev2.wunderber.com/16/bin/activate && cd /home/mwerothe/dev2.wunderber.com && npm install && npm run build
+            exit
             cloudlinux-selector restart  --json --interpreter nodejs --app-root /home/mwerothe/dev2.wunderber.com
