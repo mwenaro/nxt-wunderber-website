@@ -9,7 +9,6 @@ import { InputField } from "./form";
 import { postFormData } from "@/utils/fetch";
 import { Button } from "./buttons";
 import { useToastify } from "./toast";
-const { successToast, errorToast, ToastContainer } = useToastify();
 
 const SAFARI_TYPES = [
   { label: "--Select Safari Type--", value: "" },
@@ -49,6 +48,8 @@ const ACCOMMODATION_LEVELS = [
 ];
 
 const BookingForm: React.FC = () => {
+const {  ToastContainer } = useToastify();
+
   // consts
   const initialValues: IBookingForm = {
     fullName: "",
@@ -82,6 +83,8 @@ const BookingForm: React.FC = () => {
   });
 
   const onSubmit = async (values: IBookingForm) => {
+const { successToast, errorToast, ToastContainer } = useToastify();
+   
     try {
       let res = await postFormData("booking", values);
       let data = await res.json();

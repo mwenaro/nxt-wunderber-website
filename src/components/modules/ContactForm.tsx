@@ -7,7 +7,6 @@ import { Button } from './buttons';
 import { postFormData } from '@/utils/fetch';
 import { useToastify } from './toast';
 
-const { successToast, errorToast, ToastContainer } = useToastify();
 
 
 
@@ -50,6 +49,8 @@ const SignupSchema = Yup.object().shape({
 
 const onSubmit = async (values: FormValues) => {
     // console.log(values)
+const { successToast, errorToast, ToastContainer } = useToastify();
+
     try {
       let res =  await postFormData('contact', values);
       let data = await res.json();
