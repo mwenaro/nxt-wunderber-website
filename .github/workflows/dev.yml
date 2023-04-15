@@ -38,7 +38,7 @@ jobs:
            *lock.json
           server-dir: ./dev2.wunderber.com/
           # dangerous-clean-slate: true
-app-restart:
+  app-restart:
     needs: web-ploy
     name: 🎉 Deploy1
     runs-on: ubuntu-latest
