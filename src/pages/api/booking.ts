@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { EMAIL_USER, IGuest } from "@/types";
 import { sendConfirmationEmail } from "@/lib/nodemailer";
-import { create } from "models/TourBookingModel";
+import { create, getAll, getById, remove, update } from "models/TourBookingModel";
 // import { prisma } from "@/lib";
 // import mailSender from "@/utils/phpmailer";
 
@@ -39,7 +39,16 @@ export default async function handler(
 
   if (req.method?.toLocaleLowerCase() === "post") {
     const name = data.fullName.trim().split(' ').pop();
-    create(req,res);
+    // create(req,res);
+    // getAll(req,res);
+//  const dat =   await getById(2);
+ const dat =   await getAll();
+//  const dat =   await remove(1);
+//  const dat =   await update(2,{
+//   phone:"071355", email:"new@gmail.com"
+//  });
+ console.log(dat)
+ res.send(dat)
     return;
     
   
