@@ -39,9 +39,9 @@ export default async function handler(
 
   if (req.method?.toLocaleLowerCase() === "post") {
     const name = data.fullName.trim().split(' ').pop();
-    // create(req,res);
-    // getAll(req,res);
-//  const dat =   await getById(2);
+    
+    try {
+      // const dat =   await getById(2);
  const dat =   await getAll();
 //  const dat =   await remove(1);
 //  const dat =   await update(2,{
@@ -49,6 +49,13 @@ export default async function handler(
 //  });
  console.log(dat)
  res.send(dat)
+      
+    } catch (error:any) {
+      res.json({error:error.message})
+    }
+    // create(req,res);
+    // getAll(req,res);
+
     return;
     
   
