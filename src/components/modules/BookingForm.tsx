@@ -8,7 +8,7 @@ import CountryOptions from "./CountryOptions";
 import { InputField } from "./form";
 import { postFormData } from "@/utils/fetch";
 import { Button } from "./buttons";
-import { useToastify } from "./toast";
+import { errorToast, successToast, ToastContainer } from "./toast";
 
 const SAFARI_TYPES = [
   { label: "--Select Safari Type--", value: "" },
@@ -48,7 +48,7 @@ const ACCOMMODATION_LEVELS = [
 ];
 
 const BookingForm: React.FC = () => {
-  const { successToast, errorToast, ToastContainer } = useToastify();
+
 
 
   // consts
@@ -59,10 +59,10 @@ const BookingForm: React.FC = () => {
     country: "",
     departureDate: "",
     // safariType: "",
-    safariDuration: "",
+    tourDuration: "",
     // accommodationLevel: "",
     // otherServices: [],
-    participants: { adults: 1, kids: 0 },
+    participants: { adults: 1, kids: 0 , infants: 0},
 
     specialInterests: "",
   };
@@ -76,7 +76,7 @@ const BookingForm: React.FC = () => {
     country: Yup.string().required("Country is required"),
     departureDate: Yup.date().required("Departure date is required"),
     // safariType: Yup.string().required("Safari type is required"),
-    safariDuration: Yup.string().required("Safari duration is required"),
+    tourDuration: Yup.string().required("Safari duration is required"),
     // // participants:Yup.object().optional(),
     specialInterests: Yup.string(),
 
@@ -97,7 +97,7 @@ const BookingForm: React.FC = () => {
         "Booking was successful, kindly check your email inbox for further directions"
       );
 
-      location.reload();
+      // location.reload();
     } catch (error) {
       console.log(error);
       errorToast("There was an error, please try again");
@@ -154,7 +154,7 @@ const BookingForm: React.FC = () => {
               />
 
               <InputField
-                idAndName="safariDuration"
+                idAndName="tourDuration"
                 type="select"
                 // label="Safari Duration"
                 options={SAFARI_DURATIONS}

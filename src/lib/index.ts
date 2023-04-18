@@ -1,2 +1,5 @@
 export {prisma as prisma} from './prisma'
+export {connection as dbCon} from './mysql'
+export {db as sqCon} from './sqlite'
+export {pwdHasher as pwdHasher} from './password'
 //export {default as mongoDB} from './mongoose'

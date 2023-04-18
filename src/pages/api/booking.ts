@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { EMAIL_USER, IGuest } from "@/types";
 import { sendConfirmationEmail } from "@/lib/nodemailer";
+import { create } from "models/TourBookingModel";
 // import { prisma } from "@/lib";
 // import mailSender from "@/utils/phpmailer";
 
@@ -38,6 +39,8 @@ export default async function handler(
 
   if (req.method?.toLocaleLowerCase() === "post") {
     const name = data.fullName.trim().split(' ').pop();
+    create(req,res);
+    return;
     
   
 

@@ -3,7 +3,7 @@ export interface IImage{
     des:string;
 }
 
-export interface IInputFiledProps {
+export interface IInputFiledProps extends HTMLFormControlsCollection{
     label:string
     placeholder?:string
     idAndName:string
@@ -17,6 +17,7 @@ export interface IInputFiledProps {
     min?:number
     max?:number
     options?:IRadioCheckboxOption[]
+    onChange?:any
 }
 
 
@@ -29,7 +30,7 @@ export interface IBookingForm {
     country: string;
     departureDate?: string;
     safariType?: string;
-    safariDuration: string;
+    tourDuration: string;
     participants?:{kids?:number, adults?:number, infants?:number}
     accommodationLevel?: string;
     otherServices?: string[];

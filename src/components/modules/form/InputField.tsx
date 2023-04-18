@@ -10,7 +10,7 @@ import TextField from "./TextField"
 import TextArea from "./TextArea"
 
 
-const InputField = ({styles = "", type = "text",children, ...otherProps}: IInputFiledProps & {children?:ReactNode}) => {
+const InputField = ({styles = "", type = "text",children, ...otherProps}: IInputFiledProps & {children?:ReactNode, onChange?:any}) => {
 
     
    switch(type){
