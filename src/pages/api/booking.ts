@@ -51,7 +51,7 @@ export default async function handler(
  res.send(dat)
       
     } catch (error:any) {
-      res.json({error:error.message})
+      res.json({msg:"AN error has ocuured"})
     }
     // create(req,res);
     // getAll(req,res);

@@ -25,14 +25,16 @@ let data:any = [];
 // });
 // const [rows, fields] = await db.execute('SELECT * FROM user');
 // console.log({rows, fields})
-sqCon.all('SELECT * FROM user', [], (err, rows) => {
+sqCon.all('SELECT * FROM user', [], (err:any, rows) => {
   if (err) {
-    throw err;
+    // throw err;
+    res.status(200).json({flag:false, error:err.message});
   }
 
   // Log the results to the console
   console.log(rows);
   res.json(rows);
+  return;
 });
 
 // data = await sqCon.all('SELECT * FROM user');
