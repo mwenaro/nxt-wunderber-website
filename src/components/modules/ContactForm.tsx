@@ -47,13 +47,13 @@ const onSubmit = async (values: FormValues) => {
   // console.log(values)
 
   try {
-    let res = await postFormData("contact", values);
+    let res = await postFormData("contact2", values);
     let data = await res.json();
-    //   console.log({data})
+      console.log({data})
     successToast(
       "Dear Valued Guest. Thank you for contacting us, check your email your for further directions."
     );
-    location.reload();
+    // location.reload();
   } catch (error) {
     console.log(error);
     errorToast("There was an error, please try again");
@@ -96,8 +96,8 @@ const ActualForm = (props: FormikProps<FormValues>) => {
                 key={indx+Math.random()*100}
                   idAndName={idAndName}
                   type="select"
-                  value={selectedValue}
-                  onChange = {handleSelectChange}
+                  // value={selectedValue}
+                  // onChange = {handleSelectChange}
                 
                 >
                   <option value={""}> --- Category --- </option>
@@ -131,7 +131,6 @@ const ActualForm = (props: FormikProps<FormValues>) => {
 };
 
 export default function ContactForm() {
-  // const { successToast, errorToast, ToastContainer } = useToastify();
 
   return (
     <div className="p- sm:p-5 flex flex-col">
