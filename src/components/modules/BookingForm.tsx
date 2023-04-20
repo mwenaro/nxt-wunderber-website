@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 // import { FaStar } from "react-icons/fa";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { IBookingForm } from "@/types";
 import CountryOptions from "./CountryOptions";
@@ -9,6 +9,9 @@ import { InputField } from "./form";
 import { postFormData } from "@/utils/fetch";
 import { Button } from "./buttons";
 import { errorToast, successToast, ToastContainer } from "./toast";
+// import ReactPhoneInput from "react-phone-input-2";
+// import "react-phone-input-2/lib/style.css";
+
 
 const SAFARI_TYPES = [
   { label: "--Select Safari Type--", value: "" },
@@ -115,7 +118,7 @@ const BookingForm: React.FC = () => {
           <Form>
             <div className="flex flex-col  mx-auto max-w-md justify-center py-2 sm:py-5">
               <h3 className="text-center font-bold text-2xl">
-                Fill the form to book{" "}
+                Fill the form to book
               </h3>
               <InputField
                 idAndName="fullName"
@@ -137,6 +140,8 @@ const BookingForm: React.FC = () => {
                 placeholder="Phone Number"
                 fieldStyles="form-input w-full"
               />
+              
+          
 
               <InputField
                 idAndName="country"
