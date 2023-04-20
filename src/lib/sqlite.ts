@@ -5,7 +5,8 @@ import { pwdHasher } from './password';
 
 
 // create a database connection
-export const db = new sqlite3.Database('mydatabase.sqlite');
+// export const db = new sqlite3.Database('.mydatabase.sqlite');
+export const db = new sqlite3.Database(`${process.cwd()}/db/wunderber.db`);
 
 // create a users table
 db.run(`
@@ -80,7 +81,7 @@ db.run(`
 //   db.close();
 });
 
-const sql = 'SELECT COUNT(*) as count FROM user';
+const sql = 'SELECT COUNT(id) as count FROM user group by id';
 
 // Execute the query
 db.all(sql, [], (err, row):any => {
@@ -89,7 +90,9 @@ db.all(sql, [], (err, row):any => {
   }
 
   // Check if the count is zero
-  if (row.length === 0) {
+  console.log({row})
+  // return;
+  if (row.length > 0) {
     console.log('The table is empty');
 
 

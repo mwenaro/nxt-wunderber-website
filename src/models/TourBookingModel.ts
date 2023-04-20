@@ -1,14 +1,23 @@
 import { pwdHasher, sqCon } from "@/lib";
-import { pwdConfirm } from "@/lib/password";
+import { rtrim } from "@/utils/trim";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 //Get all
 
-export const getAll = async () => {
+const selectQueryFormulator = (table:string,columns:string|string[]='',where:any={}) =>{
+let columnz = Array.isArray(columns)?columns.join(','):columns;
+let _where = rtrim(` WHERE ${Object.keys(where).join(' = ? AND ')}`,"AND")+' = ?';
+return `SELECT ${columnz.length >0 ? columnz : '*'} FROM ${table} ${Object.keys(where).length > 0 ? _where : ''}`
+
+}
+export const getAll = async (table:string,columns:string|string[]='', where:any={}) => {
 
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM  tour_booking ';
-    sqCon.all(sql, [], (err, rows) => {
+    const sql = selectQueryFormulator(table,columns,where);
+    const _where = Object.values(where)??[];
+
+    
+    sqCon.all(sql, _where, (err, rows) => {
       if (err) {
         reject(err);
         return;
@@ -26,10 +35,10 @@ export const getAll = async () => {
 }
 
 //get by id
-export const getById = async (id: any) => {
+export const getById = async (table:string,id: any) => {
 
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM  tour_booking WHERE id = ?';
+    const sql = `SELECT * FROM  ${table} WHERE id = ?`;
     sqCon.get(sql, [id], (err, row) => {
       if (err) {
         reject(err);
@@ -47,10 +56,10 @@ export const getById = async (id: any) => {
   });
 }
 //delete by id
-export const remove = async (id: any) => {
+export const remove = async (table:string, id: any) => {
 
   return new Promise((resolve, reject) => {
-    const sql = 'DELETE FROM  tour_booking WHERE id = ?';
+    const sql = `DELETE FROM  ${table} WHERE id = ?`;
 
   sqCon.run(sql, [id], function(err) {
     if (err) {
@@ -65,17 +74,21 @@ export const remove = async (id: any) => {
 });
 }
 //update by id
-export const update = async (id: any,{phone, email}:any) => {
+export const update = async (table:string,id: any,columns:any) => {
 
   return new Promise((resolve, reject) => {
     // const sql = 'DELETE FROM  tour_booking WHERE id = ?';
 
-    const sql = 'UPDATE tour_booking SET phone = ?, email = ? WHERE id = ?';
-   sqCon.run(sql, [phone, email, id], function(err) {
+    const sql = `UPDATE ${table} SET ${rtrim(Object.keys(columns).join(' = ?,'), ',')} = ? WHERE id = ?`;
+    const _where = Object.values(columns)??[];
+    _where.push(id);
+
+   sqCon.run(sql, _where, function(err) {
       if (err) {
         reject(err);
         return;
       }
+      // console.log(this)
       resolve(this.changes);
     });
   })
@@ -92,14 +105,38 @@ export const update = async (id: any,{phone, email}:any) => {
 
 //Post
 export const create = async (
-  req: NextApiRequest,
-  res: NextApiResponse<any>
+ table: string,
+ data:any
 ) => {
-  const data: any = JSON.parse(req.body);
+  return new Promise((resolve, reject) => {
+
+ let num = Object.keys(data).length;
+  const sql = `INSERT INTO ${table} (${Object.keys(data).join(',')}) VALUES (${rtrim('?,'.repeat(num),',')})`;
+//  console.log({sql})
+//   return sql;
+  sqCon.run(sql, [...Object.values(data)], function(err) {
+    if (err) {
+      reject(err);
+      return;
+    }
+    resolve(this.lastID);
+  });
+})
+.finally(() => {
+  sqCon.close();
+});
+  //
+
+}
+
+//Post
+export const create2 = async (
+ table: string,
+ data:any
+) => {
+  // const data: any = JSON.parse(req.body);
   // res.json(data);
-  if (req.method?.toLocaleLowerCase() !== "post" || !data) {
-    return res.status(203).json({ msg: "Invalid request", flag: false });
-  }
+ 
 
   const {
     fullName: name,
@@ -136,12 +173,12 @@ export const create = async (
       if (error) {
         // console.error("Error inserting tour_booking: " + error.stack);
         console.log({ error });
-        res.status(500).json({ msg: error.message, flag: false });
+        // res.status(500).json({ msg: error.message, flag: false });
       } else {
         console.log(`tour_booking ${name} inserted successfully`);
-        res
-          .status(200)
-          .json({ msg: "TourBooking inserted succesfuly", flag: true });
+        // res
+        //   .status(200)
+        //   .json({ msg: "TourBooking inserted succesfuly", flag: true });
       }
     }
   );

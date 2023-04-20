@@ -49,3 +49,10 @@ export interface IBookingForm {
 export const EMAIL_USER= process.env.EMAIL_USER
 export const EMAIL_PWD= process.env.EMAIL_PWD
 export const EMAIL_HOST= process.env.EMAIL_HOST
+
+export interface IUser {
+  name : string
+  email:string
+  password:string
+  
+}
