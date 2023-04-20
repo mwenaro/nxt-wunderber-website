@@ -30,4 +30,4 @@ const tourBookingSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model<ITourBooking>('TourBooking', tourBookingSchema);
+export default mongoose.models.TourBooking || mongoose.model<ITourBooking>('TourBooking', tourBookingSchema);

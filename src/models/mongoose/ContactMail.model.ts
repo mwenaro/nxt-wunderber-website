@@ -18,4 +18,4 @@ const contactEmailSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model<IContactEmail>('ContactEmail', contactEmailSchema);
+export default mongoose.models.ContactEmail || mongoose.model<IContactEmail>('ContactEmail', contactEmailSchema);

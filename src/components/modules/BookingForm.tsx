@@ -86,7 +86,7 @@ const BookingForm: React.FC = () => {
   const onSubmit = async (values: IBookingForm) => {
    
     try {
-      let res = await postFormData("booking", values);
+      let res = await postFormData("booking2", values);
       let data = await res.json();
       console.log({ data });
       // toast.success("Booking was successful, kindly check your email inbox for further directions",{

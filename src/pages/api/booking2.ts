@@ -3,6 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { EMAIL_USER, IGuest } from "@/types";
 import { sendConfirmationEmail } from "@/lib/nodemailer";
 import { create, getAll, getById, remove, update } from "@/models/TourBookingModel";
+import { TourBooking } from "@/models/mongoose";
+import mongoDB from "@/lib/mongoose";
 // import { prisma } from "@/lib";
 // import mailSender from "@/utils/phpmailer";
 
@@ -50,15 +52,10 @@ let table = "tour_booking";
     const name = body.fullName.trim().split(' ').pop();
     
     try {
-      // const dat =   await getById(table,2);
- const dat =   await getAll(table, ['id','name', 'phone']);
-//  const dat = await create(table,data);
-//  const dat =   await remove(table,5);
-//  const dat =   await update(table,4,{
-//   phone:"071355", email:"new@gmail.com",name:"Mwero A"
-//  });
-//  console.log(dat)
- res.send(dat)
+      await mongoDB();
+    let saved = await TourBooking.create(data);
+    saved = await TourBooking.find();
+ res.send(saved)
       
     } catch (error:any) {
       console.log({error})
