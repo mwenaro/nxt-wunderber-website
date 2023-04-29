@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Create a model based on the schema
-const Watu = mongoose.model("Watu", userSchema);
+const Watu = mongoose.models.Watu||mongoose.model("Watu", userSchema);
 
 // export default User;
 
@@ -24,7 +24,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  await mongoDB();
+  try {
+    await mongoDB();
    let created = await Watu.find();
   //  create({
   //   name:"Mwero",
@@ -34,4 +35,10 @@ export default async function handler(
    
    console.log(created) ;
    res.status(200).json({created})  ;
+    
+  } catch (error:any) {
+    res.status(500).json({msg:error.message})
+    
+  }
+  
 }

@@ -11,6 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any | IGuest[]>
 ) {
+  if (req.method?.toLocaleLowerCase() === "post") {
   const body: any = JSON.parse(req.body);
   // res.json(data);
 
@@ -38,17 +39,17 @@ export default async function handler(
   };
 
   let result: any;
-  let table = "tour_booking";
+  // let table = "tour_booking";
 
-  if (req.method?.toLocaleLowerCase() === "post") {
-    const name = body.fullName.trim().split(" ").pop();
+
+    const selectedName = body.fullName.trim().split(" ").pop();
 
    
 
     try {
       await mongoDB();
       let saved = await TourBooking.create(data);
-      const resp = await sendConfirmationEmail(data.email, name);
+      const resp = await sendConfirmationEmail(data.email, selectedName);
 
       result = {  email: resp , data:saved};
       res.status(200).json(result);
@@ -56,5 +57,14 @@ export default async function handler(
       result = { error: error.message+" " };
       res.status(500).json(result);
     } 
+  }else {
+    try {
+      await mongoDB();
+      let saved = await TourBooking.find();
+      res.status(200).json(saved);
+    } catch (error) {
+      console.log(error)
+      res.status(200).json({ msg: "Error has occured" });
+    }
   }
 }

@@ -10,3 +10,6 @@ export const DASHBOARD_LINKS:{label:string, href:string, Icon?:any|string}[] =[
    
    
 ]
+
+
+export const API_END = process.env.NODE_ENV === 'production' ?'https://dev2.wunderber.com/api/':'htpp://localhost:3000/api/'

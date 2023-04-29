@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 // import {  prisma } from "@/lib";
 
-import {sqCon } from "@/lib";
+// import {sqCon } from "@/lib";
 import { getAll } from "@/models/TourBookingModel";
 import type { NextApiRequest, NextApiResponse } from "next";
 

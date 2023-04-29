@@ -5,12 +5,13 @@ import { IFormField, InputField } from "./form";
 import { Button } from "./buttons";
 import { postFormData } from "@/utils/fetch";
 import { ToastContainer, errorToast, successToast } from "./toast";
-import { useState } from "react";
+import React from "react";
 
 interface FormValues {
   email: string;
   fullName: string;
   subject: string;
+  subject2: string;
   body: string;
 }
 
@@ -18,6 +19,7 @@ const initialValues = {
   email: "",
   fullName: "",
   subject: "",
+  subject2: "",
   body: "",
 };
 
@@ -25,6 +27,7 @@ const FORM_FIELDS: IFormField[] = [
   { label: "", type: "text", placeholder: "Full Name", idAndName: "fullName" },
   { label: "", type: "email", placeholder: "Enter Email", idAndName: "email" },
   { label: "", type: "text", placeholder: "Subject", idAndName: "subject" },
+  // { label: "", type: "text", placeholder: "Subject", idAndName: "subject2" },
   {
     label: "Message",
     type: "textarea",
@@ -40,6 +43,7 @@ const SignupSchema = Yup.object().shape({
 
     .required("Plese Enter your Email"),
   subject: Yup.string().required("Subject is Required"),
+  // subject2: Yup.string().required("Subject is Required"),
   body: Yup.string().required("Message is Required"),
 });
 
@@ -53,7 +57,7 @@ const onSubmit = async (values: FormValues) => {
     successToast(
       "Dear Valued Guest. Thank you for contacting us, check your email your for further directions."
     );
-    // location.reload();
+    location.reload();
   } catch (error) {
     console.log(error);
     errorToast("There was an error, please try again");
@@ -61,19 +65,19 @@ const onSubmit = async (values: FormValues) => {
 };
 
 const ActualForm = (props: FormikProps<FormValues>) => {
-   const[showOtherField, toggleOtherFiled] = useState<boolean>(false) ;
-   const[selectedValue, setSelectedValue] = useState<string>('') ;
-          const handleSelectChange = (e:any)=>{
-           const value:string = e.target.value;
-           console.log(value)
-            setSelectedValue(value)
-            if(value === 'Others'){
+   const[showOtherField, toggleOtherFiled] = React.useState<boolean>(false) ;
+  //  const[selectedValue, setSelectedValue] = useState<string>('') ;
+          // const handleSelectChange = (e:any)=>{
+          //  const value:string = e.target.value;
+          //  console.log(value)
+          //   // setSelectedValue(value)
+          //   if(value === 'Others'){
               
-              toggleOtherFiled(true);
-            }else{
-              toggleOtherFiled(false);
-            }
-          }
+          //     toggleOtherFiled(true);
+          //   }else{
+          //     toggleOtherFiled(false);
+          //   }
+          // }
         
   return <Form>
     <div>
@@ -82,7 +86,7 @@ const ActualForm = (props: FormikProps<FormValues>) => {
          
 
           const re =
-            idAndName === "subject" ? (
+            idAndName === "subject" || idAndName === "subject2" ? (
               showOtherField ?(
                 <InputField
                   key={indx+Math.random()*100}
