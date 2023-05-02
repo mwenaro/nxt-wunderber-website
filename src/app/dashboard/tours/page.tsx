@@ -1,11 +1,11 @@
 import { API_END } from "@/constants/dashboard";
 import Link from "next/link";
 
-async function getTours() {
-  const res  = await fetch(`${process.env.NEXT_PUBLIC_DEV_API}dashboard/tours`, { next: { revalidate: 10 } });
-  // const res  = await fetch(`${API_END}dashboard/tours`);
-  return await res.json();
-}
+// async function getTours() {
+//   // const res  = await fetch(`${process.env.NEXT_PUBLIC_DEV_API}dashboard/tours`, { next: { revalidate: 10 } });
+//   // const res  = await fetch(`${API_END}dashboard/tours`);
+//   return await res.json();
+// }
 
 
 
@@ -18,7 +18,7 @@ const TourItem = ({ id,_id, created_at,createdAt, departureDate, country, name, 
     <div className="col-span-1 overflow-hidden p-1 flex-1">{phone}</div>
     <div className="col-span-1 overflow-hidden p-1 flex-1">{country}</div>
     {/* <div className="col-span-1 overflow-hidden p-1 flex-1">{status}</div> */}
-    <div className="col-span-1 overflow-hidden p-1 flex-2">{`${(created_at as Date|| createdAt).valueOf()}`}</div>
+    <div className="col-span-1 overflow-hidden p-1 flex-2">{`${(created_at as  Date|| createdAt).valueOf()}`}</div>
     <div className="col-span-1 overflow-hidden p-1 flex-1">{`${departureDate.valueOf()}`}</div>
     <div className="col-span-1 overflow-hidden p-1 flex-1">del</div>
     <div className="col-span-1 overflow-hidden p-1 flex-1"><Link href={`/dashboard/tours/${id||_id}`} > view</Link></div>
@@ -39,7 +39,8 @@ const titiles = <div className="p-2 grid grid-cols-12 gap-1 border-1 border-red-
 </div>
 
 export default async function Tours() {
- const tours:any[] = await getTours();
+ const tours:any[] = []
+// await getTours();
 //  console.log({tours})
 // if(!tours || tours.length <= 0){
   return <div>No data</div>
