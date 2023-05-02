@@ -5,9 +5,10 @@ const sendConfirmationEmail = async (
   to:string='mashudimwayama@gmail.com', 
   name:string='Mashudi', 
   subject: string = "Booking Confirmation",
-  body:string = `Dear ${name},\n
-  Thank you for making reservation with us. Your booking has been received and confirmed.  
-  Our representative will get back to you as soon as possible.\n\nBest regards,\n Wunderber Kenia Adventures.`
+  body:string = `<h1>Dear ${name}</h1>,\n
+  <p>Thank you for making reservation with us. Your booking has been received and confirmed. </p> 
+  <p>Our representative will get back to you as soon as possible.</p>
+  <p>Best regards, <br> Wunderber Kenia Adventures</p>`
   ,amount:number=1200) => {
 let result:any={error:"",flag:false}
 const company = 'Wunderber Kenia Adventures'
@@ -50,14 +51,14 @@ const html = `<!DOCTYPE html>
   </head>
   <body>
     <div class="container">
-      <img src="https://dev2.wunderber.com/public/assets/logo.png" alt="{company} logo" width="150" height="50">
-      <h1>${company} - Thank you for contacting us!</h1>
-      <p>Hello ${name},</p>
+      <img src="https://dev2.wunderber.com/public/assets/logo.png" alt="{company} logo" width="150" height="auto">
+      <h1>${company} - Thank you for chosing us!</h1>
+      ${body?body:`<p>Hello ${name},</p>
       <p>Thank you for contacting us through our website's contact form. We appreciate the opportunity to assist you and will do our best to provide you with the support you need.</p>
       <p>One of our team members will review your message and get back to you as soon as possible. Please note that our business hours are {hours}, and we typically respond to inquiries within {response_time}.</p>
       <p>If your request is urgent, please don't hesitate to give us a call at {phone} or chat with us live on our website. We are always here to help!</p>
       <p>Thank you again for reaching out to us. We look forward to speaking with you soon.</p>
-      <div class="signature">Best regards,<br>{signature_name}<br>${company}</div>
+      <div class="signature">Best regards,<br>{signature_name}<br>${company}</div>`}
     </div>
   </body>
 </html>
