@@ -2,8 +2,8 @@ import { API_END } from "@/constants/dashboard";
 import Link from "next/link";
 
 async function getTours() {
-  // const res  = await fetch(`${API_END}dashboard/tours`, { next: { revalidate: 10 } });
-  const res  = await fetch(`${API_END}dashboard/tours`);
+  const res  = await fetch(`${'http://localhost:3000/api/'}dashboard/tours`, { next: { revalidate: 10 } });
+  // const res  = await fetch(`${API_END}dashboard/tours`);
   return await res.json();
 }
 
@@ -40,10 +40,12 @@ const titiles = <div className="p-2 grid grid-cols-12 gap-1 border-1 border-red-
 
 export default async function Tours() {
  const tours:any[] = await getTours();
- console.log({tours})
+//  console.log({tours})
 if(!tours || tours.length <= 0){
   return <div>No data</div>
 }
+
+// return <div>Tours</div>
 
   return (
     <div className="w-full">
@@ -52,7 +54,7 @@ if(!tours || tours.length <= 0){
         {titiles}
         {
 
-        tours?  tours.map((tour) => <div key={tour?.id||Date()}>
+        tours?  tours.map((tour) => <div key={tour?.id||tour?._id}>
             <TourItem  {...tour} />
           </div>) :<div> No tours</div>
 }
