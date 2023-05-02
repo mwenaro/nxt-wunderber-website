@@ -20,7 +20,7 @@ let data = await res.json()
 console.log({data})
 setdata(data)
 }
-  },[])
+  },[path])
 
 
  

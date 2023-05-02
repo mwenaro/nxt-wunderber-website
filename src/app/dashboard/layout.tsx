@@ -17,7 +17,7 @@ const IconObject = {
   dashboard: <FaDev/>,
   guests: <FaPeopleCarry />,
   employees: <FaPeopleArrows />,
-  orders: <FaShoppingBag />,
+  tours: <FaShoppingBag />,
   settings: <FaAtom />,
   emails: <FaEnvelope />,
 

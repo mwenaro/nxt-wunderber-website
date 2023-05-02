@@ -1,7 +1,7 @@
 export const DASHBOARD_LINKS:{label:string, href:string, Icon?:any|string}[] =[
     
     {label:'Dashboard',href:"/dashboard"},
-    {label:'Orders',href:"/dashboard/orders"},
+    {label:'Tours',href:"/dashboard/tours"},
     {label:'Guests',href:"/dashboard/guests"},
     {label:'Emails',href:"/dashboard/emails"},
     {label:'Employees',href:"/dashboard/employees"},
@@ -11,5 +11,5 @@ export const DASHBOARD_LINKS:{label:string, href:string, Icon?:any|string}[] =[
    
 ]
 
-
-export const API_END = process.env.NODE_ENV === 'production' ?'https://dev2.wunderber.com/api/':'htpp://localhost:3000/api/'
+const ENV = process.env.NODE_ENV || 'development'
+export const API_END = ENV === 'production' ? process.env.NEXT_PUBLIC_PROD_API: process.env.NEXT_PUBLIC_DEV_API

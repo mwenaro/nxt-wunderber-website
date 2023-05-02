@@ -10,7 +10,10 @@ export default async function handler(
     try {
       let tours = await TourBooking.find();
       res.status(200).json(tours);
+      // res.send({data:"hello"})
     } catch (error: any) {
+      console.log({error:error.message})
+      // return res.send({error:error.message});
       let tours = await getAll('tour_booking');
      
 

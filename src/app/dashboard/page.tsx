@@ -26,7 +26,7 @@ const data: {
   labels,
   datasets: [
     {
-      label: 'Orders',
+      label: 'Tours',
       data: labels.map(() => Math.random() * 1000),
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
