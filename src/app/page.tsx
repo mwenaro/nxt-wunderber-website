@@ -9,7 +9,7 @@ export default function Home() {
   const imgPath = '/assets/images/16x9/';
 
   let _images: IImage[] = [];
-  for (let i = 1; i <= 12; i++) {
+  for (let i = 1; i <= 19; i++) {
     _images.push(
       {
         src: `${imgPath}${i}.jpg`,
@@ -23,7 +23,7 @@ export default function Home() {
       <div className='w-full p-2 flex flex-col sm:flex-row-reverse ' >
 
         <div className='w-full sm:w-1/2'>
-          <Carousel images={_images.sort(() => Math.random() - 0.5).slice(0, 11)} />
+          <Carousel images={_images.sort(() => Math.random() - 0.5).slice(0, 18)} />
         </div>
         <div className='w-full sm:w-1/2 flex flex-col items-center   p-2 sm:p-5 '>
           <div className='my-5'>

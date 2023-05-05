@@ -34,16 +34,24 @@
         margin-top: 20px;
         text-align: center;
       }
+
+      .img_container {
+        margin: 5px auto;
+        width: fit-content;
+        background-color: red;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <img
-        src="https://dev2.wunderber.com/public/assets/logo.png"
-        alt="${company} logo"
-        width="50"
-        height="auto"
-      />
+      <div class="img_container">
+        <img
+          src="https://dev2.wunderber.com/public/assets/logo.png"
+          alt="${company} logo"
+          width="150"
+          height="auto"
+        />
+      </div>
       <!-- <h1>${company} - Thank you for chosing us!</h1> -->
 
       <h3>Dear ${name}</h3>
@@ -52,6 +60,9 @@
         and confirmed. Our representative will get back to you as soon as
         possible.
       </p>
+
+      <p>Click <a href="${link}">here </a> to review your booking.</p>
+
       <p>
         Best regards, <br />
         ${company}

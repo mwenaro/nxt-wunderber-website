@@ -4,10 +4,15 @@ const sendConfirmationEmail = async (
   to: string = "mashudimwayama@gmail.com",
   name: string = "Mashudi",
   subject: string = "Booking Confirmation",
-  body: string = `<h1>Dear ${name}</h1>,\n
+  reviewLink:string = "",
+  body: string = `<h3>Dear ${name}</h3>,
+  
   <p>Thank you for making reservation with us. Your booking has been received and confirmed. 
   Our representative will get back to you as soon as possible.</p>
-  <p>Best regards, <br> Wunderber Kenia Adventures</p>`
+  <p>Click <a href="${reviewLink}">here </a> to review your booking.</p>
+  <p>Best regards,</p>
+   Wunderber Kenia Adventures</p>`
+   
 ) => {
   let result: any = { error: "", flag: false };
   const company = "Wunderber Kenia Adventures";
@@ -47,11 +52,20 @@ const sendConfirmationEmail = async (
         margin-top: 20px;
         text-align: center;
       }
+
+      .img-container{
+        margin: 5px auto;
+        width:fit-content;
+      }
+
+
     </style>
   </head>
   <body>
     <div class="container">
+    <div class="img-container">
       <img src="https://dev2.wunderber.com/public/assets/logo.png" alt="${company} logo" width="150" height="auto">
+      </div>
       <h1>${company} - Thank you for chosing us!</h1>
       ${
         body

@@ -1,6 +1,5 @@
 // "use client"
-import { API } from "@/constants";
-import { prisma } from "@/lib";
+import { API_END } from "@/constants/dashboard";
 import Link from "next/link";
 // import { NextRouter, useRouter } from "next/router";
 
@@ -12,33 +11,25 @@ interface IProps {
 }
 
 
-// const getOrder = async (id: string) => {
-//     let res = await fetch(`${API}dashboard/order/${id}`, { method: "POST", body: JSON.stringify({ id }) })
-//     const order = await res.json()
-//     return order;
-// }
-const getOrder = async (id: string) =>{fullName:"no name"}
-/*
-    await prisma.tourBooking.findUnique({
-        where: {
-            id,
-        },
-    });
-*/
+const getTour = async (id: string) => {
+    let res = await fetch(`${API_END}dashboard/tours/${id}`, { method: "POST", body: JSON.stringify({ id }) ,cache:"no-store"})
+    return  res.json()
+  
+}
 
-export default async function Order({ params }: IProps) {
+
+export default async function Tour({ params }: IProps) {
     // const router = useRouter();
-    const order = await getOrder(params.id)
-    // console.log({ order })
-
-    //   const { order } = await getOrder(params.id);
+    const tour = await getTour(params.id)
+   
 
 
     return <div className="p-4">
-        <div className=" flex gap-5"><Link href={`/dashboard/orders`} className=" hover:bg-skin-primary hover:text-2xl"> <span>Go Back</span> </Link>
-            <h3>Order Item</h3>
+        <div className=" flex gap-5"><Link href={`/dashboard/tours`} className=" hover:bg-skin-primary hover:text-2xl"> <span>Go Back</span> </Link>
+            
         </div>
-        <div>hello no</div>
+        <h3>Tour Item</h3>
+        <div>{tour.name}</div>
     </div>
 
 }

@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
 const MONGO_DB_URI_DEV = `mongodb://localhost:27017/wunderber_db?retryWrites=true&w=majority`;
+const ENV = process.env.NODE_ENV || 'developemnt'
 const MONGO_DB_URI =
-  process.env.NODE_ENV === "production"
+  ENV === "production"
     ? `mongodb+srv://${process.env.NEXT_PUBLIC_MONGO_DB_USER}:${process.env.NEXT_PUBLIC_MONGO_DB_PWD}@cluster0.2f29nts.mongodb.net/wunderber_db?retryWrites=true&w=majority`
     : MONGO_DB_URI_DEV;
 

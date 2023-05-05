@@ -1,4 +1,5 @@
-import { getAll } from "@/models/TourBookingModel";
+// import { getAll } from "@/models/TourBookingModel";
+import mongoDB from "@/lib/mongoose";
 import { TourBooking } from "@/models/mongoose";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -8,13 +9,15 @@ export default async function handler(
 ) {
   if (req.method?.toLocaleLowerCase() === "get") {
     try {
+      await mongoDB();
       let tours = await TourBooking.find();
       res.status(200).json(tours);
+      // res.send({data:"hello"})
     } catch (error: any) {
-      let tours = await getAll('tour_booking');
-     
+      console.log({ error: error.message });
+      // return res.send({error:error.message});
 
-      tours?res.status(200).json(tours):res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message });
     }
   }
 }

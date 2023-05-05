@@ -7,6 +7,7 @@ import mongoDB from "@/lib/mongoose";
 
 
 
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any | IGuest[]>
@@ -49,22 +50,19 @@ export default async function handler(
     try {
       await mongoDB();
       let saved = await TourBooking.create(data);
-      const resp = await sendConfirmationEmail(data.email, selectedName);
+      const reviewLink:string = `https://dev2.wunderber.com/dashboard/tours/${saved?._id||''}`;
+      const toAdmin = await sendConfirmationEmail(process.env.NEXT_PUBLIC_EMAIL_USER,"Admin", "Booking Notification",reviewLink,`<p>You have a booking notification from ${name} which is due on ${data.departureDate}</p>. <p>Kindly check <a href="${reviewLink}">here </a>  and respond ASAP!</p>`)
+      const toClient = await sendConfirmationEmail(data.email, selectedName,reviewLink);
 
-      result = {  email: resp , data:saved};
+      result = {  email: {toAdmin, toClient} , data:saved};
       res.status(200).json(result);
     } catch (error: any) {
       result = { error: error.message+" " };
       res.status(500).json(result);
     } 
   }else {
-    try {
-      await mongoDB();
-      let saved = await TourBooking.find();
-      res.status(200).json(saved);
-    } catch (error) {
-      console.log(error)
+   
       res.status(200).json({ msg: "Error has occured" });
-    }
+
   }
 }

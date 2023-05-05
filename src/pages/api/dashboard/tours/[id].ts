@@ -1,21 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { prisma } from "@/lib";
+import { TourBooking } from "@/models/mongoose";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-const getOrder = async (id: string) =>
-  await prisma.tourBooking.findFirst({
-    where: {
-      id,
-    },
-  });
-
+// const getOrder = async (id: string) => await TourBooking.findById(id);
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-    // const {id} = JSON.parse()
+  // const {id} = JSON.parse()
   try {
-    let data = await getOrder(JSON.parse(req.body).id);
+    // = await getOrder(JSON.parse(req.body).id);
+    let data =  await TourBooking.findById(JSON.parse(req.body).id);
     if (data) {
       res.status(200).json(data);
       return;

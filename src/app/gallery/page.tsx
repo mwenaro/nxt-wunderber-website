@@ -10,7 +10,7 @@ const Gallery: React.FC = () => {
   const imgPath = '/assets/images/16x9/';
 
  let _images: IImage[] = [];
- for (let i = 1; i <= 12; i++) {
+ for (let i = 1; i <= 19; i++) {
  _images.push(
   {
     src:`${imgPath}${i}.jpg`,
