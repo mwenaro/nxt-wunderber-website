@@ -7,18 +7,35 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  // const {id} = JSON.parse()
+  const {id} = req.query;
   try {
-    // = await getOrder(JSON.parse(req.body).id);
-    let data =  await TourBooking.findById(JSON.parse(req.body).id);
-    if (data) {
-      res.status(200).json(data);
+    // console.log({params:req});
+    let result;
+    switch (req.method?.toLocaleUpperCase()) {
+
+      case 'DELETE':
+        result =  await TourBooking.deleteOne({_id:id})
+        
+        break;
+    
+      default:
+        result =  await TourBooking.findById(id);
+        break;
+    }
+   
+    
+
+
+
+
+    if (result) {
+      res.status(200).json(result);
       return;
     }
 
-    res.status(201).json(data);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    res.status(201).json(result);
+  } catch (error:any) {
+    console.log({error:error.message});
+    res.status(500).json({error:error.message});
   }
 }

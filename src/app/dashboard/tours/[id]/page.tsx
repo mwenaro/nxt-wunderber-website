@@ -12,7 +12,7 @@ interface IProps {
 
 
 const getTour = async (id: string) => {
-    let res = await fetch(`${API_END}dashboard/tours/${id}`, { method: "POST", body: JSON.stringify({ id }) ,cache:"no-store"})
+    let res = await fetch(`${API_END}dashboard/tours/${id}`, {cache:"no-store"})
     return  res.json()
   
 }
