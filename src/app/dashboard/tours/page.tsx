@@ -1,8 +1,10 @@
 import { API_END } from "@/constants/dashboard";
 import TourItem from "../../../components/layout/tourItem";
+import { use } from "react";
 
 async function getTours() {
   const res = await fetch(`${API_END}dashboard/tours`, { cache: "no-store" });
+  // const res = await fetch(`${API_END}dashboard/tours`, { next: {invalidate:10} });
   // const res  = await fetch(`${process.env.NEXT_PUBLIC_DEV_API}dashboard/tours`, { cache:"no-store"});
   // const res  = await fetch(`${API_END}dashboard/tours`);
 
@@ -42,7 +44,7 @@ const titiles = (
 );
 
 export default async function Tours() {
-  const tours: any[] = await getTours();
+  const tours =use(getTours());
 
   if (!tours || tours.length <= 0) {
     return <div>No data</div>;
@@ -54,7 +56,7 @@ export default async function Tours() {
       <div>
         {titiles}
         {tours &&
-          tours.map((tour) => (
+          tours.map((tour:any) => (
             <div key={tour?.id || tour?._id}>
               <TourItem tour={tour} />
             </div>
