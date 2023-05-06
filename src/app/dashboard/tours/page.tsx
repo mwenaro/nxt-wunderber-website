@@ -2,65 +2,102 @@ import { API_END } from "@/constants/dashboard";
 import Link from "next/link";
 
 async function getTours() {
-  const res  = await fetch(`${API_END}dashboard/tours`, { cache:"no-store" });
+  const res = await fetch(`${API_END}dashboard/tours`, { cache: "no-store" });
   // const res  = await fetch(`${process.env.NEXT_PUBLIC_DEV_API}dashboard/tours`, { cache:"no-store"});
   // const res  = await fetch(`${API_END}dashboard/tours`);
-  
+
   return await res.json();
 }
 
+async function deleteTour(id: string) {
+  return await (
+    await fetch(`${API_END}dashboard/tours/${id}`, { cache: "no-store" })
+  ).json();
+}
 
-
-export interface IBookedTour { _id?:string, id?: string, created_at?: Date,createdAt?:Date, departureDate: Date | string, country: string, name: string, email: string, phone: any, status: any }
-const TourItem = ({ id,_id, created_at,createdAt, departureDate, country, name, email, phone}: IBookedTour
-) =>
+export interface IBookedTour {
+  _id?: string;
+  id?: string;
+  created_at?: Date;
+  createdAt?: Date;
+  departureDate: Date | string;
+  country: string;
+  name: string;
+  email: string;
+  phone: any;
+  status: any;
+}
+const TourItem = ({
+  id,
+  _id,
+  created_at,
+  createdAt,
+  departureDate,
+  country,
+  name,
+  email,
+  phone,
+}: IBookedTour) => (
   <div className="p-2 grid grid-cols-12 gap-1 border-1  border-red-400">
     <div className="col-span-1 overflow-hidden p-1 flex-2">{name}</div>
     <div className="col-span-1 overflow-hidden p-1 flex-2">{email}</div>
     <div className="col-span-1 overflow-hidden p-1 flex-1">{phone}</div>
     <div className="col-span-1 overflow-hidden p-1 flex-1">{country}</div>
     {/* <div className="col-span-1 overflow-hidden p-1 flex-1">{status}</div> */}
-    <div className="col-span-1 overflow-hidden p-1 flex-2">{`${(created_at as  Date|| createdAt).valueOf()}`}</div>
+    <div className="col-span-1 overflow-hidden p-1 flex-2">{`${(
+      (created_at as Date) || createdAt
+    ).valueOf()}`}</div>
     <div className="col-span-1 overflow-hidden p-1 flex-1">{`${departureDate.valueOf()}`}</div>
-    <div className="col-span-1 overflow-hidden p-1 flex-1">del</div>
-    <div className="col-span-1 overflow-hidden p-1 flex-1"><Link href={`/dashboard/tours/${id||_id}`} > view</Link></div>
+    <div className="col-span-1 overflow-hidden p-1 flex-1">
+      <span
+        className="w-full rounded-md bg-red-400 p-2"
+        onClick={() => deleteTour(id ? id : _id ? _id : "")}
+      >
+        x
+      </span>
+    </div>
+    <div className="col-span-1 overflow-hidden p-1 flex-1">
+      <Link href={`/dashboard/tours/${id || _id}`}> view</Link>
+    </div>
   </div>
+);
 
-const titiles = <div className="p-2 grid grid-cols-12 gap-1 border-1 border-red-400 font-bold ">
-  <div className="col-span-1 overflow-hidden p-1 flex-2">Full Name</div>
-  <div className="col-span-1 overflow-hidden p-1 flex-2">Email</div>
-  <div className="col-span-1 overflow-hidden p-1 flex-1">Phone</div>
-  <div className="col-span-1 overflow-hidden p-1 flex-1">Country</div>
-  {/* <div className="col-span-1 overflow-hidden p-1 flex-1">Pay Status</div> */}
-  <div className="col-span-1 overflow-hidden p-1 flex-2">Booking Date</div>
-  <div className="col-span-1 overflow-hidden p-1 flex-1">Due Date</div>
+const titiles = (
+  <div className="p-2 grid grid-cols-12 gap-1 border-1 border-red-400 font-bold ">
+    <div className="col-span-1 overflow-hidden p-1 flex-2">Full Name</div>
+    <div className="col-span-1 overflow-hidden p-1 flex-2">Email</div>
+    <div className="col-span-1 overflow-hidden p-1 flex-1">Phone</div>
+    <div className="col-span-1 overflow-hidden p-1 flex-1">Country</div>
+    {/* <div className="col-span-1 overflow-hidden p-1 flex-1">Pay Status</div> */}
+    <div className="col-span-1 overflow-hidden p-1 flex-2">Booking Date</div>
+    <div className="col-span-1 overflow-hidden p-1 flex-1">Due Date</div>
 
-  <div className="col-span-1 overflow-hidden p-1 flex-1"><span className="w-full rounded-md bg-red-400 p-2">x</span></div>
-  <div className="col-span-1 overflow-hidden p-1 flex-1">View</div>
-
-</div>
+    <div className="col-span-1 overflow-hidden p-1 flex-1">
+      <span className="w-full rounded-md bg-red-400 p-2">x</span>
+    </div>
+    <div className="col-span-1 overflow-hidden p-1 flex-1">View</div>
+  </div>
+);
 
 export default async function Tours() {
- const tours:any[] = await getTours();
- 
-if(!tours || tours.length <= 0){
-  return <div>No data</div>
-}
+  const tours: any[] = await getTours();
 
-
+  if (!tours || tours.length <= 0) {
+    return <div>No data</div>;
+  }
 
   return (
     <div className="w-full">
       <h2>Tour Bookings</h2>
       <div>
         {titiles}
-        {
-
-         tours && tours.map((tour) => <div key={tour?.id||tour?._id}>
-            <TourItem  {...tour} />
-          </div>) 
-}
+        {tours &&
+          tours.map((tour) => (
+            <div key={tour?.id || tour?._id}>
+              <TourItem {...tour} />
+            </div>
+          ))}
       </div>
     </div>
-  )
+  );
 }
