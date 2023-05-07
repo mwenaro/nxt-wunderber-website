@@ -6,7 +6,7 @@ export const DASHBOARD_LINKS:{label:string, href:string, Icon?:any|string}[] =[
     {label:'Emails',href:"/dashboard/emails"},
     {label:'Employees',href:"/dashboard/employees"},
     {label:'Settings',href:"/dashboard/settings"},
-    {label:'Home',href:"/"},
+    {label:'Home ',href:"/"},
    
    
 ]
