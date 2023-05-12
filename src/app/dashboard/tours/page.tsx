@@ -1,6 +1,6 @@
 import { API_END } from "@/constants/dashboard";
 import TourItem from "../../../components/layout/tourItem";
-import { use } from "react";
+// import { use } from "react";
 
 async function getTours() {
   const res = await fetch(`${API_END}dashboard/tours`, { cache: "no-store" });
@@ -10,8 +10,6 @@ async function getTours() {
 
   return await res.json();
 }
-
-
 
 export interface IBookedTour {
   _id?: string;
@@ -44,7 +42,7 @@ const titiles = (
 );
 
 export default async function Tours() {
-  const tours =use(getTours());
+  const tours = await getTours();
 
   if (!tours || tours.length <= 0) {
     return <div>No data</div>;
@@ -56,7 +54,7 @@ export default async function Tours() {
       <div>
         {titiles}
         {tours &&
-          tours.map((tour:any) => (
+          tours.map((tour: any) => (
             <div key={tour?.id || tour?._id}>
               <TourItem tour={tour} />
             </div>

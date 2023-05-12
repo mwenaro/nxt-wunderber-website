@@ -1,7 +1,6 @@
-
+// import { getAll } from "@/models/TourBookingModel";
 import mongoDB from "@/lib/mongoose";
-import { ContactMail, TourBooking, User } from "@/models/mongoose";
-// import { ITourBooking } from "@/models/mongoose/TourBooking.model";
+import { TourBooking } from "@/models/mongoose";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -11,14 +10,8 @@ export default async function handler(
   if (req.method?.toLocaleLowerCase() === "get") {
     try {
       await mongoDB();
-      const [numTours, numUsers, numConactMails, toursCountry] = await Promise.all([
-        TourBooking.count(),
-        User.count(),
-        ContactMail.count(),
-        TourBooking.find({}, { email: 1, country: 1, createdAt: 1 })
-      ]);
-
-      res.status(200).json({ nums: { numTours, numUsers, numConactMails }, toursCountry });
+      let tours = await TourBooking.find();
+      res.status(200).json(tours);
       // res.send({data:"hello"})
     } catch (error: any) {
       console.log({ error: error.message });

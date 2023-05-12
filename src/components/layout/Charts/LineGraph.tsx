@@ -5,19 +5,20 @@ import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
-    BarElement,
+   
+    LineElement,
     Title,
     Tooltip,
     Legend,
 } from 'chart.js';
-import { Bar, Line } from 'react-chartjs-2';
+import {  Line, Doughnut } from 'react-chartjs-2';
 import { IGraphData } from './types';
 
 
 ChartJS.register(
     CategoryScale,
     LinearScale,
-    BarElement,
+    LineElement,
     Title,
     Tooltip,
     Legend
@@ -61,8 +62,11 @@ const defaultData: IGraphData = {
 
 
 
-export default function BarGraph({ options=defaultOptions, data=defaultData, title = '', labels = [] }: { options?: any, data?: IGraphData, title?: string, labels?: string[] | [] }) {
 
-    return <Bar options={title.length>0 ? {...options, plugins:{...options.plugins,title:{...options.plugins.title,text:title}} } : options} data={data} />
+
+export default function LineGraph({ options=defaultOptions, data=defaultData, title = '', labels = [] }: { options?: any, data?: IGraphData, title?: string, labels?: string[] | [] }) {
+
+    return <Line options={title.length>0 ? {...options, plugins:{...options.plugins,title:{...options.plugins.title,text:title}} } : options} data={data} />
+    // return <Doughnut options={title.length>0 ? {...options, plugins:{...options.plugins,title:{...options.plugins.title,text:title}} } : options} data={data} />
+    
 }
-

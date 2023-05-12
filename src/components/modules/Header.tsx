@@ -1,3 +1,4 @@
+"use client"
 
 import { useState } from 'react';
 import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
