@@ -2,7 +2,7 @@
 // import { get } from '@/app/routes/contact/get';
 import mongoDB from '@/lib/mongoose';
 import { ContactMail } from '@/models/mongoose';
-import { getParams } from '@/utils/function';
+
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
@@ -20,14 +20,14 @@ export async function GET(request: Request) {
 
 
 export async function PUT(request: Request) {
-    const id = getParams(request.url?.toString());
+    // const id = getParams(request.url?.toString());
 
     return new Response('Hello, PUT')
 }
 
 export async function DELETE(request: Request) {
 
-    const id = getParams(request.url?.toString());
+    // const id = getParams(request.url?.toString());
     return new Response('Hello, DELETE')
 }
 
