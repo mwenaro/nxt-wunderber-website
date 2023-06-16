@@ -2,75 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    --primary: 75, 78, 109;
-    --secondary: 229, 229, 229;
-    --accent: 242, 217, 116;
-    --main: 247, 247, 247;
-  }
-
-  .wild-savannah-theme {
-    --primary: 234, 115, 23;
-    --secondary: 199, 178, 153;
-    --accent: 61, 61, 61;
-    --main: 255, 255, 255;
-  }
-
-  .verdant-jungle-theme {
-    --primary: 46, 93, 93;
-    --secondary: 152, 193, 217;
-    --accent: 217, 176, 140;
-    --main: 242, 242, 242;
-  }
-
-  .golden-horizon-theme {
-    --primary: 249, 168, 40;
-    --secondary:28, 28, 28;
-    --accent: 255, 255, 255;
-    --main:234, 234, 234 ;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
 }
 
-/* Earthy Tones for main background color */
-/* body {
-  background-color: #7f9a52;
-} */
-/* Earthy Tones for icons */
-/* .icon {
-  color: #cc5500;
-} */
-
-/* Earthy Tones for form input fields */
-/* input[type="text"] {
-  background-color: #9b7e4e;
-} */
-
-/* Safari Sunset for accents */
-/* .icon,
-.border {
-  color: #ff4500;
-} */
-/* Safari Sunset for hover effects */
-/* a:hover,
-button:hover {
-  background-color: #ffb6c1;
-} */
-
-/* Jungle Hues for links */
-/* a {
-  color: #87ceeb;
-} */
-
-/* Jungle Hues for headings and buttons */
-/* h1,
-h2,
-h3,
-button {
-  color: #008080;
-} */
-
-/* Jungle Hues for form labels */
-/* label {
-  color: #ffa07a;
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
 } */

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { wunderberDBCon } from '../../lib/mongoose';
 
 export interface IContactEmail extends mongoose.Document {
   name: string;
@@ -18,4 +19,4 @@ const contactEmailSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.models.ContactEmail || mongoose.model<IContactEmail>('ContactEmail', contactEmailSchema);
+export default wunderberDBCon.models.ContactEmail || wunderberDBCon.model<IContactEmail>('ContactEmail', contactEmailSchema);

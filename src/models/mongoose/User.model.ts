@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { wunderberDBCon } from '../../lib/mongoose';
 
 export interface IUser extends mongoose.Document {
   name: string;
@@ -20,4 +21,4 @@ const userSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.models.User || mongoose.model<IUser>('User', userSchema);
+export default wunderberDBCon.models.User || wunderberDBCon.model<IUser>('User', userSchema);

@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import { wunderberDBCon } from '../../lib/mongoose';
+
 
 export interface ITourBooking extends mongoose.Document {
   name: string;
@@ -30,4 +32,4 @@ const tourBookingSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.models.TourBooking || mongoose.model<ITourBooking>('TourBooking', tourBookingSchema);
+export default wunderberDBCon.models.TourBooking || wunderberDBCon.model<ITourBooking>('TourBooking', tourBookingSchema);
