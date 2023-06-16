@@ -1,3 +1,5 @@
+"use client"
+
 import { FC } from 'react';
 import {
     Chart as ChartJS,
