@@ -4,7 +4,7 @@ import React from 'react';
 const WhoWeAre: React.FC = () => {
   return (
     <div className="container mx-auto max-w-5xl">
-      <h1 className="text-4xl font-bold my-4 text-center">Wunderber Kenya Tours and Safari</h1>
+      <h1 className="text-4xl font-bold my-4 text-center">Wunderber Kenia Adventures</h1>
       <p className="text-lg mb-4">
         Wunderber Kenya Tours and Safari is a premier travel management company that offers unforgettable holiday packages and wildlife safaris in East Africa, specifically in Kenya and Tanzania. We take pride in our extensive experience, unwavering dedication, unparalleled professionalism, steadfast commitment, and outstanding reliability that have earned us a reputation as the most preferred and reliable tour operator in the region.
       </p>
