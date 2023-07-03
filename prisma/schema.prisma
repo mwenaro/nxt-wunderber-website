@@ -46,7 +46,7 @@ model TourBooking {
   Infants          Int?     @default(0)
   paymentStatus    Int      @default(0)
   updator          User     @relation(fields: [userId], references: [id])
-  userId           String
+  userId           String @default("0784852d-72d8-4cb7-9352-a9a60fd0a19a")
   specialInterests String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @default(now())

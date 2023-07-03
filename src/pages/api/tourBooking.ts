@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { IGuest } from "@/types";
 import { sendConfirmationEmail } from "@/lib/nodemailer";
 import { prisma } from "@/lib";
-import { SU } from "@/constants";
+
 
 
 
@@ -13,7 +13,7 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
   const {participants, ...rest} = JSON.parse(req.body)
-  const data = {...rest,...participants,userId:SU};
+  const data = {...rest,...participants};
 
   if (req.method?.toLocaleLowerCase() === "post") {
     try {

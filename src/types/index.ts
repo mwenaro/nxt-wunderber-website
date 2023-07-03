@@ -34,6 +34,9 @@ export interface IBookingForm {
     accommodationLevel?: string;
     otherServices?: string[];
     specialInterests: string;
+    status? :string
+    id? : string
+    userId?: string
    
   }
 
