@@ -1,0 +1,1 @@
+export {prisma as prisma} from './prisma'

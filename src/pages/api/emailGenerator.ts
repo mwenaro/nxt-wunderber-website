@@ -1,4 +1,5 @@
-import { sendConfirmationEmail } from "@/utils/email";
+
+import { sendConfirmationEmail } from "@/lib/nodemailer";
 import { NextApiRequest, NextApiResponse } from "next";
 
 

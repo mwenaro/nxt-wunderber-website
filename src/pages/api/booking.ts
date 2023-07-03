@@ -1,7 +1,10 @@
 import { Database } from "../../utils/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { IGuest } from "@/types";
-import { sendConfirmationEmail } from "@/utils/email";
+import { sendConfirmationEmail } from "@/lib/nodemailer";
+
+
+
 const guestDb = Database();
 type Data =
   | {

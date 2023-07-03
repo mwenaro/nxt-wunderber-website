@@ -2,7 +2,7 @@ import { EMAIL_HOST, EMAIL_PWD, EMAIL_USER } from "@/types";
 
 const nodemailer = require('nodemailer');
 
-export const sendConfirmationEmail = async (email:string='mweroabdalla@gmail.com', name:string='Mwero Abdalla', amount:number=1200) => {
+const sendConfirmationEmail = async (email:string='mweroabdalla@gmail.com', name:string='Mwero Abdalla', amount:number=1200) => {
 let result:any={error:"",flag:false}
   try {
     // Create a nodemailer transport object
@@ -40,3 +40,4 @@ let result:any={error:"",flag:false}
 };
 
 
+export default  sendConfirmationEmail 
